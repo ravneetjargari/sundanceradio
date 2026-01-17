@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.png" type="image/png">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sundance Radio</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-bar">
+  <div class="top-bar-container">
+    <a href="tel:14033012700" class="top-bar-item">
+      <span class="icon">📞</span>
+      <span class="text">403-301-2700</span>
+    </a>
+
+    <a href="mailto:info@sundanceradio.ca" class="top-bar-item">
+      <span class="icon">✉️</span>
+      <span class="text">info@sundanceradio.ca</span>
+    </a>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container">
+    <div class="logo-container">
+      <img src="logo.png" alt="Sundance Radio Logo" class="logo-image">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+      <button class="hamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="has-dropdown">
+            <a href="#" class="dropdown-toggle">Radios</a>
+            <ul class="dropdown-menu">
+            <li><a href="radios-digital.html">Digital Radios</a></li>
+            <li><a href="radios-analog.html">Analog Radios</a></li>
+        </ul>
+        </li>
+        <li><a href="citywide.html">City Wide</a></li>
+        <li><a href="rentals.html">Rentals</a></li>
+        <li><a href="service.html">Service</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="sundancepoc.html">SundancePOC</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<!-- Main Banner / Slideshow -->
+ <!-- Main Hero Banner -->
+<section class="hero-banner">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <p class="hero-tagline">Innovative solutions for navigating the wireless world.</p>
+
+      <h1>
+        Sundance Radio Communications is dedicated to working with all of our customers
+        to help serve their ongoing two-way radio communication needs.
+      </h1>
+
+      <div class="hero-buttons">
+        <a href="about.html" class="btn btn-outline">WHO WE ARE</a>
+        <a href="service.html" class="btn btn-primary">WHAT WE DO</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="promo-hero">
+  <div class="promo-slides" id="promoSlides"></div>
+
+  <!-- Optional navigation arrows -->
+  <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+  <button class="next" onclick="changeSlide(1)">&#10095;</button>
+</section>
+
+<section class="why-sundance">
+  <div class="container">
+    <h2>Why Sundance Radio?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon">📞</div>
+        <h3>Two-Way Radios</h3>
+        <p>Sundance Radio provides a wide range of Kenwood two-way radio products & accessories.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon">📞</div>
+        <h3>Radio Rentals</h3>
+        <p>Sundance Radio Communications Ltd. offers daily, weekly, and monthly radio rentals to all of our clients.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon">🛰️</div>
+        <h3>City-Wide Coverage</h3>
+        <p>Kenwood offers the only class 1 division 1 A&B certified intrinsically safe 2 Watt radio. Due to the hazards of operating in these environments.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon">🏠</div>
+        <h3>In House Solutions</h3>
+        <p>Being a Sales and service shop we have both outbound and inbound staff to complete your sales, service and installation needs to ensure that all of our clients needs are met.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon">⏱️</div>
+        <h3>25 Years Experience</h3>
+        <p>A leader in two-way communications for both Retail and Corporate clients in Calgary for the last 25 years.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon">🛟</div>
+        <h3>Great Support</h3>
+        <p>Quality service installers and technicians provide installations or removals for Kenwood two-way radios, as well as radio programming and repairs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<main class="container">
+<article id="content"></article>
+</main>
+
+
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-column">
+      <h3>About Us</h3>
+      <p>
+        Sundance Radio has been a leader in Two-way Radio Communications
+        for both Retail and Corporate clients in Calgary for the last 25 years.
+      </p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Location</h3>
+      <p>
+        Bay A, 8240 31 Street SE<br>
+        Calgary, Alberta, Canada
+      </p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Office Hours</h3>
+      <p>
+        Mon–Fri: 8:00am – 5:00pm<br>
+        Sat & Sun: Closed
+      </p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © Sundance Radio Communications
+  </div>
+</footer>
+
+
+
+<script src="markdown-loader.js"></script>
+<script>loadMarkdown('home.md');</script>
+<script src="main.js"></script>
+
+</body>
+</html>

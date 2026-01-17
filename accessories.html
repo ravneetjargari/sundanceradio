@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sundance Radio | Accessories</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Accessories page-only CSS (keeps your global theme, uses your variables) -->
+  <style>
+    /* ===============================
+       ACCESSORIES PAGE (matches your theme)
+    ================================ */
+
+    .accessories-hero {
+      padding: 42px 0 10px;
+    }
+
+    .accessories-hero h1 {
+      margin: 0;
+      font-size: clamp(2.0rem, 3.2vw, 3rem);
+      font-weight: 950;
+      letter-spacing: -0.6px;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .accessories-hero p {
+      margin: 10px 0 0;
+      max-width: 78ch;
+      color: var(--muted-text);
+      font-size: 1.06rem;
+    }
+
+    /* PAGE-SPECIFIC CATEGORY BAR (second navbar) */
+    .category-bar {
+      position: sticky;
+      top: 132px; /* top-bar (sticky) + header (sticky). adjust if needed */
+      z-index: 3200;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* On mobile, your header shifts; keep this simpler */
+    @media (max-width: 768px) {
+      .category-bar { top: 0; }
+    }
+
+    .category-bar .container {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 1.25rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .category-pill {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+
+      border-radius: 999px;
+      text-decoration: none;
+
+      color: rgba(15,23,42,0.78);
+      font-weight: 800;
+      letter-spacing: .2px;
+
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: var(--shadow-soft);
+
+      transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+    }
+
+    .category-pill:hover {
+      transform: translateY(-1px);
+      background: rgba(0,119,204,0.08);
+      border-color: rgba(0,119,204,0.18);
+    }
+
+    .category-pill.active {
+      color: var(--dark-text);
+      background: rgba(0,58,143,0.10);
+      border-color: rgba(0,58,143,0.18);
+    }
+
+    /* About card (uses same “tile” vibe as your cards) */
+    .about-xzone {
+      padding: 22px 0 8px;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 22px;
+      box-shadow: var(--shadow-soft);
+      padding: 22px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-card::after{
+      content:"";
+      position:absolute;
+      inset:-45%;
+      background:
+        radial-gradient(closest-side, rgba(0,119,204,0.18), transparent 60%),
+        radial-gradient(closest-side, rgba(242,194,0,0.16), transparent 60%);
+      filter: blur(24px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .about-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      font-weight: 950;
+      color: var(--dark-text);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-card p {
+      margin: 0 0 12px;
+      color: var(--muted-text);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-card p strong {
+      color: var(--dark-text);
+    }
+
+    .about-card p:last-child { margin-bottom: 0; }
+
+    /* Sections */
+    .acc-section {
+      padding: 34px 0 10px;
+    }
+
+    .acc-section .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .acc-section h2 {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 950;
+      letter-spacing: -0.3px;
+      color: var(--dark-text);
+    }
+
+    .acc-section .sub {
+      margin: 0;
+      color: var(--muted-text);
+      font-size: 1.0rem;
+    }
+
+    /* Product grid + cards (premium tiles like your feature-card) */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .product-card {
+      grid-column: span 12;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 22px;
+      box-shadow: 0 18px 45px rgba(2,6,23,0.10);
+      overflow: hidden;
+      position: relative;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    }
+
+    /* Gradient ring border (like your premium tile patch) */
+    .product-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: 22px;
+      padding: 1px;
+      background: linear-gradient(135deg,
+        rgba(0,58,143,0.55),
+        rgba(0,119,204,0.40),
+        rgba(23,195,178,0.35),
+        rgba(242,194,0,0.25)
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events:none;
+      opacity: 0.55;
+    }
+
+    .product-card:hover{
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+      border-color: rgba(0,119,204,0.18);
+    }
+
+    .product-media {
+      aspect-ratio: 16 / 9;
+      background:
+        radial-gradient(600px 380px at 30% 30%, rgba(0,119,204,0.12), transparent 55%),
+        radial-gradient(600px 380px at 70% 30%, rgba(23,195,178,0.10), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.12));
+      display: grid;
+      place-items: center;
+    }
+
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-body {
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-name {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 950;
+      color: var(--dark-text);
+      letter-spacing: -0.2px;
+    }
+
+    .product-desc {
+      margin: 0;
+      color: var(--muted-text);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 10px 22px rgba(2,6,23,0.05);
+      color: rgba(15,23,42,0.78);
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    /* Reuse your .btn styles; add small safety */
+    .product-actions .btn {
+      padding: 11px 16px;
+      font-size: 0.95rem;
+    }
+
+    @media (min-width: 640px) {
+      .product-card { grid-column: span 6; }
+    }
+    @media (min-width: 980px) {
+      .product-card { grid-column: span 4; }
+    }
+
+    /* Anchor offset so sticky bars don’t hide headings */
+    .anchor-offset { scroll-margin-top: 180px; }
+    @media (max-width: 768px) {
+      .anchor-offset { scroll-margin-top: 20px; }
+    }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+      color: var(--muted-text);
+    }
+    .empty-state strong { color: var(--dark-text); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===============================
+       TOP CONTACT BAR (same classes)
+  ================================ -->
+  <div class="top-bar">
+    <div class="top-bar-container">
+      <a class="top-bar-item" href="tel:4033012700"><span class="icon">📞</span> 403-301-2700</a>
+      <a class="top-bar-item" href="mailto:info@sundanceradio.ca"><span class="icon">✉️</span> info@sundanceradio.ca</a>
+    </div>
+  </div>
+
+  <!-- ===============================
+       HEADER (same classes)
+  ================================ -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo-container">
+        <a href="index.html" aria-label="Sundance Radio Home">
+          <img src="logo.png" alt="Sundance Radio Logo" />
+        </a>
+      </div>
+
+  <nav class="site-nav">
+      <button class="hamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="has-dropdown">
+            <a href="#" class="dropdown-toggle">Radios</a>
+            <ul class="dropdown-menu">
+            <li><a href="radios-digital.html">Digital Radios</a></li>
+            <li><a href="radios-analog.html">Analog Radios</a></li>
+        </ul>
+        </li>
+        <li><a href="citywide.html">City Wide</a></li>
+        <li><a href="rentals.html">Rentals</a></li>
+        <li><a href="service.html">Service</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="sundancepoc.html">SundancePOC</a></li>
+      </ul>
+    </nav>
+    </div>
+  </header>
+
+  <!-- ===============================
+       PAGE HERO
+  ================================ -->
+  <section class="accessories-hero">
+    <div class="container">
+      <h1>Accessories</h1>
+      <p>
+        Browse our accessory categories below. Built for demanding two-way radio environments, these products are organized so you can
+        quickly find the right fit for your team.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===============================
+       SECOND NAV (page specific)
+  ================================ -->
+  <div class="category-bar" role="navigation" aria-label="Accessories categories">
+    <div class="container">
+      <a class="category-pill" href="#poc-radio">POC RADIO</a>
+      <a class="category-pill" href="#charger">Charger</a>
+      <a class="category-pill" href="#headset">Headset</a>
+      <a class="category-pill" href="#cell-booster">Cell Booster</a>
+      <a class="category-pill" href="#other-brands">Other brand product</a>
+    </div>
+  </div>
+
+  <!-- ===============================
+       ABOUT X-ZONE
+  ================================ -->
+  <section class="about-xzone">
+    <div class="container">
+      <div class="about-card">
+        <h2>About X-Zone</h2>
+        <p><strong>Empowering users with Two-Way Radio Accessories that work as hard as they do.</strong></p>
+        <p>
+          With three decades of experience in demanding two-way radio environments, X-Zone Technologies specializes in designing and
+          supplying radio accessories for the wholesale communication accessory market. They offer durable and versatile communication
+          solutions tailored for active and harsh settings.
+        </p>
+        <p>
+          X-Zone's products are designed to compete with OEM accessories, providing customers with improved profit margins and end-users
+          with a high-quality product at a competitive price point.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================
+       PRODUCT SECTIONS
+  ================================ -->
+  <main>
+    <section id="poc-radio" class="acc-section anchor-offset">
+      <div class="container">
+        <div class="section-head">
+          <h2>POC RADIO</h2>
+          <p class="sub">Push-to-Talk over Cellular accessories and devices.</p>
+        </div>
+        <div class="product-grid" data-grid="poc-radio"></div>
+      </div>
+    </section>
+
+    <section id="charger" class="acc-section anchor-offset">
+      <div class="container">
+        <div class="section-head">
+          <h2>Charger</h2>
+          <p class="sub">Single, multi-unit, and vehicle charging solutions.</p>
+        </div>
+        <div class="product-grid" data-grid="charger"></div>
+      </div>
+    </section>
+
+    <section id="headset" class="acc-section anchor-offset">
+      <div class="container">
+        <div class="section-head">
+          <h2>Headset</h2>
+          <p class="sub">Audio options for loud and busy environments.</p>
+        </div>
+        <div class="product-grid" data-grid="headset"></div>
+      </div>
+    </section>
+
+    <section id="cell-booster" class="acc-section anchor-offset">
+      <div class="container">
+        <div class="section-head">
+          <h2>Cell Booster</h2>
+          <p class="sub">Signal boosting products for improved coverage.</p>
+        </div>
+        <div class="product-grid" data-grid="cell-booster"></div>
+      </div>
+    </section>
+
+    <section id="other-brands" class="acc-section anchor-offset">
+      <div class="container">
+        <div class="section-head">
+          <h2>Other brand product</h2>
+          <p class="sub">Additional accessories and popular items from trusted brands.</p>
+        </div>
+        <div class="product-grid" data-grid="other-brands"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===============================
+       FOOTER (matches your classes)
+  ================================ -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Sundance Radio</h3>
+        <p>Professional communication solutions, radios, accessories, rentals, and service—built for the field.</p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <p>
+          <a href="index.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Home</a><br/>
+          <a href="digital.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Digital Radios</a><br/>
+          <a href="analog.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Analog Radios</a><br/>
+          <a href="accessories.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Accessories</a><br/>
+          <a href="service.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Service</a>
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <p>
+          Phone: 403-301-2700<br/>
+          Email: info@sundanceradio.ca
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © <span id="year"></span> Sundance Radio Communications
+    </div>
+  </footer>
+
+  <!-- ===============================
+       JS (hamburger + dropdown + products)
+  ================================ -->
+  <script>
+  // Footer year
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Mobile nav toggle (matches your CSS: .nav-links.active)
+  const hamburger = document.querySelector(".hamburger");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("active");
+      hamburger.setAttribute("aria-expanded", String(open));
+    });
+
+    // Mobile dropdown behavior (your CSS expects .has-dropdown.open)
+    document.querySelectorAll(".has-dropdown .dropdown-toggle").forEach((toggle) => {
+      toggle.addEventListener("click", (e) => {
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          e.preventDefault();
+          toggle.parentElement.classList.toggle("open");
+        }
+      });
+    });
+
+    // Close nav when clicking a link (mobile)
+    navLinks.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          navLinks.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  }
+
+  // ===============================
+  // PRODUCTS
+  // category must be: poc-radio, charger, headset, cell-booster, other-brands
+  // Images should be in the format: "<sku>.jpg"
+  // Examples: "15-14085.jpg" or "AM-406.jpg" or "sc-fusionpro-ca.jpg"
+  // ===============================
+
+  const products = [
+  // =========================
+  // X-ZONE (CHARGERS)
+  // =========================
+  {
+    sku: "15-14078",
+    category: "charger",
+    name: "X-Zone 12 Bank Charger for Kenwood 45L, 69L Battery",
+    desc: "Rugged multi-unit gang charger with 12 replaceable charging slots for high-volume operations. Built to keep fleets powered and organized with reliable, consistent charging performance for Kenwood 45L/69L style packs.",
+    tags: ["12 Bank", "Kenwood 45L/69L", "Fleet charging"],
+    link: ""
+  },
+  {
+  sku: "AM-406",
+  category: "other-brands",
+  name: "Antenna Window Bracket for Mag Mount",
+  desc: "Window/edge bracket designed to route and secure a magnetic mount antenna setup without drilling. Ideal for quick installs, temporary vehicle setups, and clean cable routing while keeping a solid antenna mount point.",
+  tags: ["Bracket", "No-drill", "Mag mount", "Cable routing"],
+  link: "https://www.cwsupply.ca/shop/am-406-antenna-window-bracket-for-mag-mount-3740?category=177"
+},
+  {
+    sku: "15-14079",
+    category: "charger",
+    name: "X-Zone 6 Bank Charger for Kenwood 45L, 69L Battery",
+    desc: "Compact 6-slot gang charger designed for faster turnaround in shops, depots, and vehicles-in/vehicles-out workflows. Durable build with practical multi-battery convenience for Kenwood 45L/69L style packs.",
+    tags: ["6 Bank", "Kenwood 45L/69L", "Compact"],
+    link: ""
+  },
+  {
+    sku: "15-14080",
+    category: "charger",
+    name: "X-Zone 6 Bank Charger for Kenwood 55L, 57L Battery",
+    desc: "Space-saving 6-slot multi-unit charger engineered for consistent charging cycles and daily duty use. Great for teams that need multiple batteries ready without taking up a full bench footprint (Kenwood 55L/57L style packs).",
+    tags: ["6 Bank", "Kenwood 55L/57L", "Daily duty"],
+    link: ""
+  },
+  {
+    sku: "15-14081",
+    category: "charger",
+    name: "X-Zone 12 Bank Charger for Kenwood 55L, 57L Battery",
+    desc: "High-capacity 12-slot gang charger built for busy environments where battery readiness is critical. Ideal for staging, charging rotation, and keeping multiple radios in service (Kenwood 55L/57L style packs).",
+    tags: ["12 Bank", "Kenwood 55L/57L", "High capacity"],
+    link: ""
+  },
+
+  // =========================
+  // X-ZONE (HEADSETS)
+  // =========================
+  {
+    sku: "15-14082",
+    category: "headset",
+    name: "X-Zone Overhead Dual Muff Carbon Fiber Headset Kit",
+    desc: "Overhead dual-muff hearing protection headset with a noise-cancelling boom mic for clear transmit audio in high-noise environments. Secure fit and built for long shifts.",
+    tags: ["Overhead", "Dual muff", "Noise-cancelling"],
+    link: ""
+  },
+  {
+    sku: "15-14083",
+    category: "headset",
+    name: "X-Zone Tactical Noise Canceling Headset for 2 Pin Kenwood (Kit)",
+    desc: "Tactical dual-muff headset kit with a noise-cancelling boom microphone and a large, glove-friendly PTT. Quick-disconnect radio cable supports fast setup for active operations (2-pin Kenwood).",
+    tags: ["Tactical", "Large PTT", "2-Pin Kenwood"],
+    link: ""
+  },
+  {
+    sku: "15-14084",
+    category: "headset",
+    name: "X-Zone Noise Cancelling Helmet Headset for 2 Pin Kenwood (Kit)",
+    desc: "Helmet-style headset kit designed for stable wear and clear comms in demanding environments. Noise-cancelling boom mic helps cut background noise while maintaining voice clarity (2-pin Kenwood).",
+    tags: ["Helmet", "Noise-cancelling", "2-Pin Kenwood"],
+    link: ""
+  },
+
+  // =========================
+  // X-ZONE (OTHER BRANDS)
+  // =========================
+  {
+    sku: "15-14076",
+    category: "other-brands",
+    name: "X-Zone Surveillance Kit for 2 Pin Kenwood Portable Radio (Listen Only)",
+    desc: "Low-profile surveillance earpiece kit for discreet monitoring. Designed for comfort and reliable audio in environments where covert listening is required (2-pin Kenwood).",
+    tags: ["Listen-only", "Discreet", "2-Pin Kenwood"],
+    link: ""
+  },
+  {
+    sku: "15-14077",
+    category: "other-brands",
+    name: "X-Zone Speaker Mic for 2 Pin Kenwood Portable Radio",
+    desc: "Durable speaker microphone accessory that improves audio clarity and convenience for mobile users. Ideal for users who want quick talk/listen without reaching for the radio.",
+    tags: ["Speaker mic", "Field use", "2-Pin Kenwood"],
+    link: ""
+  },
+  {
+    sku: "15-14085",
+    category: "other-brands",
+    name: "X-Zone Replacement Radio Cable for TNC20 Tactical Headset (Kenwood 2 Pin, QD)",
+    desc: "Replacement quick-disconnect (QD) radio cable designed for TNC20 tactical headset kits. Keeps your headset system serviceable and ready with a direct swap cable (Kenwood 2-pin).",
+    tags: ["Replacement", "Quick-disconnect", "Kenwood 2-Pin"],
+    link: ""
+  },
+
+  // =========================
+  // SURECALL (CELL BOOSTER)
+  // =========================
+  {
+    sku: "sc-fusionpro-ca",
+    category: "cell-booster",
+    name: "SureCall Fusion Professional 2.0 – 8 Band Booster Kit",
+    desc: "High-performance in-building booster kit designed to improve voice quality, data speeds, and overall reliability for multiple users across major Canadian carriers. Built for larger homes, cottages, and commercial spaces where coverage matters most.",
+    tags: ["8-band", "Building kit", "Multi-user"],
+    link: "https://www.cwsupply.ca/shop/sc-fusionpro-ca-surecall-fusion-professional-2-0-8-band-booster-kit-6113?category=161"
+  },
+  {
+    sku: "sc-fusion2go5g-otr",
+    category: "cell-booster",
+    name: "SureCall Fusion2Go 5G – 7 Band OTR Booster Kit",
+    desc: "Vehicle-grade booster kit for over-the-road applications. Improves in-cab signal stability for calls, texts, and data while travelling through weak coverage areas.",
+    tags: ["7-band", "OTR", "Vehicle kit"],
+    link: "https://www.cwsupply.ca/shop/sc-fusion2go5g-otr-surecall-fusion2go-5g-7-band-otr-booster-kit-7369?category=161"
+  },
+  {
+    sku: "scflare-3ca",
+    category: "cell-booster",
+    name: "SureCall Flare – 5 Band Booster Kit",
+    desc: "Compact booster kit built to strengthen indoor signal where coverage is inconsistent. Great for improving call clarity and usable data in smaller homes, cabins, and offices.",
+    tags: ["5-band", "Indoor coverage", "Compact"],
+    link: "https://www.cwsupply.ca/shop/scflare-3ca-surecall-flare-5-band-booster-kit-4810?category=161"
+  },
+  {
+    sku: "SC-FUSION2GO5G-RV",
+    category: "cell-booster",
+    name: "SureCall Fusion2Go 5G – 7 Band RV Booster Kit",
+    desc: "RV-focused booster kit designed to maintain more consistent connectivity for travellers. Helps reduce dropped calls and improves data performance in remote or fringe coverage areas.",
+    tags: ["7-band", "RV", "Travel"],
+    link: ""
+  },
+  {
+    sku: "SC-FUSION2GO5G-VEH",
+    category: "cell-booster",
+    name: "SureCall Fusion2Go 5G – 7 Band Vehicle Booster Kit",
+    desc: "General vehicle booster kit built to improve mobile coverage for daily driving and work fleets. Supports more reliable calling and data for phones and hotspots while on the move.",
+    tags: ["7-band", "Vehicle", "Fleet-ready"],
+    link: ""
+  },
+  {
+    sku: "sc-528w",
+    category: "cell-booster",
+    name: "SureCall 5G Ultra Slim Dome Antenna",
+    desc: "Low-profile ceiling-mount omni-directional antenna for in-building cell signal boosters. Designed for wideband coverage across 617–2700 MHz with an N-Female connector for 360° indoor signal distribution.",
+    tags: ["Ceiling", "Omni", "N-Female", "Wideband"],
+    link: "https://www.cwsupply.ca/shop/sc-528w-surecall-5g-ultra-slim-dome-antenna-4805?category=161"
+  },
+  {
+    sku: "sc-outdoor-wedge-75ohm",
+    category: "cell-booster",
+    name: "Cellular Outdoor Wedge Antenna 75 Ohm",
+    desc: "Wideband directional outdoor antenna with an F-Female connector designed for use with signal boosters to capture and route tower signal into a building system.",
+    tags: ["Outdoor", "Directional", "75 Ohm", "F-Female"],
+    link: ""
+  },
+  {
+    sku: "sc-288w",
+    category: "cell-booster",
+    name: "SureCall Fiber Glass Omni Antenna (N Female)",
+    desc: "Outdoor omni-directional fiberglass antenna with an N-Female connector designed for 360° signal capture with cell booster systems.",
+    tags: ["Outdoor omni", "Fiberglass", "N-Female"],
+    link: ""
+  },
+  {
+    sku: "SC-208W",
+    category: "cell-booster",
+    name: "SureCall 3.8\" Low-Profile Magnetic Mount Antenna",
+    desc: "3.8-inch low-profile magnetic roof-mount omni antenna for mobile booster systems, featuring an FME-Female connector for reliable signal capture on the move.",
+    tags: ["Mag mount", "Low-profile", "Vehicle", "FME-Female"],
+    link: ""
+  },
+  {
+    sku: "SC-FME-WHIP",
+    category: "cell-booster",
+    name: "SureCall FME Female Whip Antenna",
+    desc: "Compact wideband whip antenna with FME-Female connector designed for mobile/vehicle booster systems.",
+    tags: ["Whip", "FME-Female", "Mobile"],
+    link: ""
+  },
+  {
+    sku: "SC110W",
+    category: "cell-booster",
+    name: "SureCall Fusion2Go Patch Antenna",
+    desc: "Wideband interior patch antenna designed for Fusion2Go mobile booster systems—ideal for focused in-vehicle or RV coverage.",
+    tags: ["Patch", "Wideband", "Fusion2Go"],
+    link: ""
+  },
+  {
+    sku: "SC-NM-WHIP",
+    category: "cell-booster",
+    name: "SureCall Whip Antenna with N-Male Connector",
+    desc: "Wideband indoor omni-directional whip antenna with N-Male connector for in-building booster and DAS-style installations using 50-ohm components.",
+    tags: ["Indoor", "Omni", "N-Male", "Wideband"],
+    link: ""
+  },
+
+  // =========================
+  // OPEK (OTHER BRANDS)
+  // =========================
+
+
+  { sku: "AM-407", category: "other-brands", name: "Mirror Mount, Clamp-On (Small Diameter)", desc: "Clamp-on mirror mount sized for smaller mirror arms—clean antenna install without drilling.", tags: ["Mirror mount", "Clamp-on", "Small"], link: "" },
+  { sku: "AM-305", category: "other-brands", name: "Mirror Mount Bracket (No Clamp)", desc: "Mirror mount bracket for vehicle antenna installs where a clamp is not required—supports stable mounting with the right hardware.", tags: ["Mirror mount", "Bracket", "Vehicle"], link: "" },
+  { sku: "AM-421", category: "other-brands", name: "Mirror Mount Bracket for Hatchback", desc: "Hatchback-compatible mount option for antenna installs on vehicles where traditional mirror mounts aren’t suitable.", tags: ["Hatchback", "Mount", "Vehicle"], link: "" },
+  { sku: "AM-420", category: "other-brands", name: "OPEK Mirror Mount (Clamp-On) for Dodge Ram", desc: "Vehicle-specific clamp-on mirror mount designed to fit Dodge Ram mirror arms for a sturdy mobile antenna install.", tags: ["Dodge Ram", "Mirror mount", "Clamp-on"], link: "" },
+  { sku: "AM-410", category: "other-brands", name: "Standard Mirror Antenna Mount", desc: "Standard mirror arm antenna mount built for reliable long-term vehicle antenna installs with secure fastening.", tags: ["Mirror mount", "Standard", "Vehicle"], link: "" },
+  { sku: "AM-411", category: "other-brands", name: "Standard Mirror Antenna Mount (Large Diameter)", desc: "Large-diameter version of the standard mirror mount for bigger mirror arms and heavier-duty installs.", tags: ["Mirror mount", "Large diameter", "Heavy-duty"], link: "" },
+  { sku: "AM-412", category: "other-brands", name: "Standard Mirror Antenna Mount (Medium Diameter)", desc: "Medium-diameter mirror mount option suited for common commercial vehicle mirror arms.", tags: ["Mirror mount", "Medium", "Commercial"], link: "" },
+  { sku: "AM-408", category: "other-brands", name: "Standard Mirror Antenna Mount (Small Diameter)", desc: "Small-diameter mirror mount for tighter mirror arms while keeping a stable antenna platform.", tags: ["Mirror mount", "Small", "Stable"], link: "" },
+  { sku: "AM-413", category: "other-brands", name: "Standard Mirror Antenna Mount (Extra Small)", desc: "Extra-small diameter mirror mount option for slim mirror arms and compact install constraints.", tags: ["Mirror mount", "Extra small", "Compact"], link: "" },
+  { sku: "AM-416", category: "other-brands", name: "Standard Mirror Antenna Mount (Extra Large)", desc: "Extra-large mirror mount option for oversized mirror arms—built for vibration and tough road use.", tags: ["Mirror mount", "Extra large", "Road-ready"], link: "" },
+  {
+    sku: "AM-409",
+    category: "other-brands",
+    name: "Standard L 3/4 Hole Fender Antenna Bracket",
+    desc: "L-bracket fender mount designed for clean antenna installs on vehicle body panels—sturdy mounting point without complex fabrication.",
+    tags: ["Fender bracket", "L-bracket", "Vehicle"],
+    link: "https://www.cwsupply.ca/shop/am-409-standard-l-3-4-hole-fender-antenna-bracket-4797?category=177"
+  },
+  {
+  sku: "SC-PSU-FUSION5S5X",
+  category: "cell-booster",
+  name: "SureCall AC Power Supply for Fusion 5S/5X",
+  desc: "AC power adapter designed for SureCall Fusion 5S and Fusion 5X booster systems. Ideal as a replacement or spare to maintain stable, reliable booster operation.",
+  tags: ["AC Power", "Fusion 5S", "Fusion 5X", "Replacement"],
+  link: ""
+},
+{
+  sku: "SC-DC-CIG-12V-5A",
+  category: "cell-booster",
+  name: "SureCall DC 12V Cig. Power Adapter (12V 5A)",
+  desc: "12V DC cigarette lighter power adapter for SureCall mobile/vehicle booster systems. A practical spare for fleets and travel setups to keep your booster powered on the road.",
+  tags: ["12V", "Vehicle power", "Mobile booster", "5A"],
+  link: ""
+},
+{
+  sku: "SC-FUSION2GO-PSU",
+  category: "cell-booster",
+  name: "SureCall Fusion2Go 12V DC Power Supply",
+  desc: "12V DC power supply built for SureCall Fusion2Go mobile booster systems. Provides consistent power for dependable performance in vehicles and mobile installs.",
+  tags: ["12V", "DC Power", "Fusion2Go", "Mobile"],
+  link: ""
+},
+{
+  sku: "SP-SPKR8W-M-79",
+  category: "other-brands",
+  name: "Small External Speaker for Inrico TM-7Plus and TM-9",
+  desc: "Compact external speaker designed to improve receive audio clarity for Inrico TM-7Plus, TM-9, and similar radios. Enhances loudness and intelligibility in vehicles and workspaces.",
+  tags: ["External speaker", "Compact", "Inrico", "Receive audio"],
+  link: "https://www.cwsupply.ca/shop/sp-spkr8w-m-79-small-external-speaker-for-inrico-tm-7plus-and-tm-9-7374?category=177"
+},
+{
+  sku: "SP-TM7P23",
+  category: "other-brands",
+  name: "Small External Speaker for Inrico TM-7Plus (2023) Only",
+  desc: "External speaker designed specifically for the 2023 version of the Inrico TM-7Plus. Improves receive audio loudness and clarity in vehicles, dispatch setups, and noisy work environments.",
+  tags: ["External speaker", "Inrico TM-7Plus 2023", "Vehicle audio"],
+  link: "https://www.cwsupply.ca/shop/sp-tm7p23-small-external-speaker-for-inrico-tm-7plus-2023-only-7355"
+},
+{
+  sku: "SP-SPKR8",
+  category: "other-brands",
+  name: "Small External Speaker (3.5mm MONO)",
+  desc: "Compact external speaker with a 3.5mm mono plug designed to improve receive audio clarity and loudness. Ideal for vehicles, workstations, and noisy environments where built-in radio speakers fall short.",
+  tags: ["External speaker", "3.5mm mono", "Compact", "Vehicle audio"],
+  link: "https://www.cwsupply.ca/shop/sp-spkr8-small-external-speaker-3-5mm-mono-4759"
+},
+{
+  sku: "AM-306",
+  category: "other-brands",
+  name: "Mirror Mount, Clamp-On (Large Diameter)",
+  desc: "Heavy-duty clamp-on mirror mount designed for large-diameter mirror arms. Provides a strong, vibration-resistant mounting solution for mobile antenna installations on commercial vehicles and trucks.",
+  tags: ["Mirror mount", "Clamp-on", "Large diameter", "Vehicle antenna"],
+  link: "https://www.cwsupply.ca/shop/am-306-mirror-mount-clamp-on-large-diameter-4505?category=177"
+},
+{
+  sku: "SP-GP5D",
+  category: "other-brands",
+  name: "OPEK 5.25\" Antenna Adhesive Disk",
+  desc: "Adhesive-backed ground plane disk designed for aluminum or non-metal vehicle roofs. Allows proper installation of ground-plane antennas without drilling while helping optimize antenna performance.",
+  tags: ["Ground plane", "Adhesive disk", "5.25\"", "No-drill"],
+  link: "https://www.cwsupply.ca/shop/sp-gp5d-opek-5-25-antenna-adhesive-disk-6893"
+},
+{
+  sku: "SP-GP4D",
+  category: "other-brands",
+  name: "OPEK 4\" Antenna Adhesive Disk",
+  desc: "Compact adhesive-backed ground plane disk designed for aluminum or non-metal vehicle roofs. Enables proper ground-plane antenna installation without drilling while helping improve antenna performance.",
+  tags: ["Ground plane", "Adhesive disk", "4\"", "No-drill"],
+  link: "https://www.cwsupply.ca/shop/sp-gp4d-opek-4-antenna-adhesive-disk-3738"
+},
+{
+  sku: "EXA-NMO-4",
+  category: "other-brands",
+  name: "NMO Bulkhead w/ N Female",
+  desc: "NMO bulkhead mount with N-Female connector designed for clean antenna cable routing through panels, brackets, or enclosures. Provides a secure, professional finish for mobile and fixed antenna installations.",
+  tags: ["NMO", "Bulkhead", "N-Female", "Panel mount"],
+  link: "https://www.cwsupply.ca/shop/exa-nmo-4-nmo-bulkhead-w-n-female-4555"
+},
+{
+  sku: "NF-NF-BH",
+  category: "other-brands",
+  name: "N Female to N Female Bulkhead",
+  desc: "N-Female to N-Female bulkhead adapter designed for clean panel-mount coaxial cable routing. Ideal for vehicle, rack, and enclosure installations requiring a secure and professional antenna feed-through.",
+  tags: ["Bulkhead", "N-Female", "Adapter", "Panel mount"],
+  link: "https://www.cwsupply.ca/shop/nf-nf-bh-n-female-to-n-female-bulkhead-4527"
+},
+{
+  sku: "SC-FUSION2GO3-CA",
+  category: "cell-booster",
+  name: "SureCall Fusion2Go 3.0 – 5 Band Mobile Wireless Cellular Booster",
+  desc: "Mobile 5-band cellular signal booster designed to improve voice quality, text reliability, and data performance while on the road. Ideal for vehicles operating in weak or fringe coverage areas across major Canadian carriers.",
+  tags: ["5-band", "Mobile booster", "Vehicle", "Canada"],
+  link: ""
+},
+{
+  sku: "sc-ws-4-5g",
+  category: "cell-booster",
+  name: "SureCall Ultra-Wideband 4-Way Splitter",
+  desc: "Bi-directional 50-ohm 4-way splitter designed to evenly distribute amplified cellular signal to multiple indoor antennas. Compatible with 2G, 3G, 4G LTE, and 5G booster systems operating across wideband frequencies.",
+  tags: ["4-Way Splitter", "Wideband", "50 Ohm", "Indoor distribution"],
+  link: "https://www.cwsupply.ca/shop/scws-4-4-way-splitter-wideband-3678"
+},
+{
+  sku: "sc-2way-splitter",
+  category: "cell-booster",
+  name: "SureCall 2 Way Wideband Splitter",
+  desc: "Bi-directional 50-ohm 2-way wideband splitter designed to evenly divide amplified cellular signal between two indoor antennas. Compatible with 2G, 3G, 4G LTE, and 5G booster systems across common cellular frequencies.",
+  tags: ["2-Way Splitter", "Wideband", "50 Ohm", "Indoor distribution"],
+  link: ""
+},
+{
+  sku: "sc-6db-tap-nf",
+  category: "cell-booster",
+  name: "Cellular -6 dB Tap (N-Female) Coupler",
+  desc: "Bi-directional -6 dB tap coupler with N-Female connectors designed to split amplified cellular signal with controlled attenuation. Ideal for multi-antenna booster installations where balanced signal distribution is required.",
+  tags: ["-6 dB Tap", "Coupler", "N-Female", "Wideband"],
+  link: ""
+},
+
+
+];
+
+// ✅ Total products in this array: 50
+
+
+// ✅ Totals after cleaning:
+// - Total products: 56
+// - Duplicate SKUs removed: SC-PSU-FUSION5S5X, SC-DC-CIG-12V-5A, SC-FUSION2GO-PSU, SC-FME-WHIP, SC110W, SC-NM-WHIP
+// - Kept SC-TAP-6DB-NF (removed the extra sc-6db-tap-nf duplicate)
+// - Kept SC-208W and removed SC-LOWPROFILE-MAG-3-8 (use the real SureCall SKU)
+
+
+const IMAGE_EXT = {
+  // CW / OPEK (and any other CW items you upload as PNG)
+  "AM-411": "png",
+  "sc-fusionpro-ca": "png",
+  "SC-FUSION2GO5G-VEH": "png",
+  "SC-FUSION2GO3-CA": "png",
+  "scflare-3ca": "png",
+  "SC-INDOOR-DOME-5G": "png",
+  "sc-528w": "png",
+  "sc-288w": "png",
+  "SC-208W": "png",
+  "SC-DC-CIG-12V-5A": "png",
+  "SC-FME-WHIP": "png",
+  "SC110W": "png",
+  // Add more CW SKUs here as you upload them
+};
+
+
+  // If you want to automatically map image from sku, keep render using this:
+  function imageFromSku(sku) {
+  if (!sku) return "";
+  const ext = IMAGE_EXT[sku] || "jpg"; // default stays JPG
+  return "images/accessories/" + String(sku).replaceAll("/", "-") + "." + ext;
+}
+
+
+
+  function escapeHtml(str) {
+    return String(str || "").replace(/[&<>"']/g, (s) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[s]));
+  }
+
+  function renderProducts() {
+    const grids = document.querySelectorAll("[data-grid]");
+    const byCat = products.reduce((acc, p) => {
+      (acc[p.category] ||= []).push(p);
+      return acc;
+    }, {});
+
+    grids.forEach((grid) => {
+      const cat = grid.getAttribute("data-grid");
+      const list = byCat[cat] || [];
+
+      if (!list.length) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <strong>No products added yet.</strong><br/>
+            Add products inside the <code>products</code> array in <code>accessories.html</code>.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map((p) => {
+        const img = p.image && String(p.image).trim()
+          ? p.image
+          : imageFromSku(p.sku);
+
+        const mailLink = `mailto:info@sundanceradio.ca?subject=${encodeURIComponent(
+          "Accessory Request - " + (p.name || "")
+        )}`;
+
+        return `
+          <article class="product-card">
+            <div class="product-media">
+              ${
+                img
+                  ? `<img src="${img}" alt="${escapeHtml(p.name)}">`
+                  : `<div style="font-weight:900; opacity:.75; color:white;">Add Image</div>`
+              }
+            </div>
+
+            <div class="product-body">
+              <h3 class="product-name">${escapeHtml(p.name)}</h3>
+              <p class="product-desc">${escapeHtml(p.desc)}</p>
+
+              ${
+                p.tags && p.tags.length
+                  ? `<div class="product-tags">
+                      ${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}
+                    </div>`
+                  : ""
+              }
+
+              <div class="product-actions">
+                ${
+                  p.link
+                    ? `<a class="btn btn-outline" href="${p.link}" target="_blank" rel="noopener">Request Info</a>`
+                    : `<a class="btn btn-outline" href="${mailLink}">Request Info</a>`
+                }
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    });
+  }
+
+  // Active pill highlight (scroll spy)
+  function setupActivePills() {
+    const pills = Array.from(document.querySelectorAll(".category-pill"));
+    const sections = pills
+      .map((p) => document.querySelector(p.getAttribute("href")))
+      .filter(Boolean);
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = "#" + entry.target.id;
+          pills.forEach((p) =>
+            p.classList.toggle("active", p.getAttribute("href") === id)
+          );
+        });
+      },
+      { rootMargin: "-35% 0px -60% 0px", threshold: 0.01 }
+    );
+
+    sections.forEach((s) => obs.observe(s));
+  }
+
+  renderProducts();
+  setupActivePills();
+</script>
+
+
+</body>
+</html>

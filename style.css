@@ -1,0 +1,1293 @@
+/* ===============================
+   RESET & GLOBALS (Modern Light)
+================================ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  /* Your brand core (still blue + gold) */
+  --primary-blue: #003a8f;
+  --secondary-blue: #0077cc;
+  --accent-gold: #f2c200;
+
+  /* Modern neutrals */
+  --bg: #f6f8fc;
+  --surface: rgba(255,255,255,0.80);
+  --surface-2: rgba(255,255,255,0.95);
+  --border: rgba(15,23,42,0.08);
+
+  --dark-text: #0f172a;
+  --muted-text: rgba(15,23,42,0.68);
+
+  /* Fancy accents */
+  --grad: linear-gradient(90deg, #003a8f, #0077cc, #17c3b2);
+  --shadow: 0 18px 45px rgba(2, 6, 23, 0.12);
+  --shadow-soft: 0 12px 28px rgba(2, 6, 23, 0.08);
+
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+
+  --ease: cubic-bezier(.2,.9,.2,1);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background:
+    radial-gradient(900px 600px at 15% 0%, rgba(0,119,204,0.12), transparent 55%),
+    radial-gradient(800px 560px at 90% 10%, rgba(23,195,178,0.12), transparent 60%),
+    radial-gradient(900px 600px at 50% 100%, rgba(242,194,0,0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg), #ffffff);
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+img { max-width: 100%; display: block; }
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ===============================
+   TOP CONTACT BAR (Glass)
+================================ */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 4000;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.top-bar-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 600;
+
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 10px 22px rgba(2,6,23,0.06);
+  transition: transform .25s var(--ease), background .25s var(--ease);
+}
+.top-bar-item:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.9);
+}
+.top-bar-item .icon { font-size: 1rem; }
+
+/* ===============================
+   HEADER + NAV (Full background bar)
+================================ */
+.site-header {
+  position: sticky;
+  top: 46px; /* sits under top-bar */
+  z-index: 3500;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.logo-container img {
+  height: 86px;
+  width: auto;
+  filter: drop-shadow(0 12px 22px rgba(2, 6, 23, 0.12));
+  animation: floatIn .7s var(--ease) both;
+}
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(-8px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Nav container */
+.site-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+/* Full-width nav background (pill bar) */
+.site-nav ul.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  gap: 6px;
+
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* No more "button links" look */
+.site-nav ul.nav-links li {
+  margin: 0;
+}
+
+/* Clean modern links */
+.site-nav ul.nav-links li a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: rgba(15,23,42,0.78);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .2px;
+
+  background: transparent;
+  border: 1px solid transparent;
+
+  transition: transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+
+/* Animated underline */
+.site-nav ul.nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--grad);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s var(--ease);
+  opacity: 0.95;
+}
+
+.site-nav ul.nav-links li a:hover {
+  color: var(--dark-text);
+  background: rgba(0,119,204,0.08);
+  border-color: rgba(0,119,204,0.18);
+  transform: translateY(-1px);
+}
+.site-nav ul.nav-links li a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Optional: active page (add class="active" in HTML) */
+.site-nav ul.nav-links li a.active {
+  color: var(--dark-text);
+  background: rgba(0,58,143,0.10);
+  border-color: rgba(0,58,143,0.18);
+}
+.site-nav ul.nav-links li a.active::after { transform: scaleX(1); }
+
+/* Hamburger (kept but modern) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 14px;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: var(--grad);
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+/* ===============================
+   DROPDOWN (Modern glass)
+================================ */
+.has-dropdown { position: relative; }
+
+.dropdown-menu {
+  position: absolute;
+  top: 125%;
+  left: 0;
+  min-width: 230px;
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+
+  border-radius: 16px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: var(--shadow);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s var(--ease);
+  z-index: 5000;
+}
+
+/* Show on hover (DESKTOP ONLY) */
+@media (min-width: 769px) {
+  .has-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(15,23,42,0.85);
+  font-weight: 700;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  transition: background .2s var(--ease), transform .2s var(--ease), border-color .2s var(--ease);
+}
+.dropdown-menu li:last-child a { margin-bottom: 0; }
+.dropdown-menu li a:hover {
+  background: rgba(242,194,0,0.22);
+  border-color: rgba(242,194,0,0.35);
+  transform: translateX(2px);
+}
+
+/* ===============================
+   HERO BANNER (Premium)
+================================ */
+.hero-banner {
+  position: relative;
+  height: 92vh;
+  min-height: 620px;
+  width: 100%;
+  background-image:
+    radial-gradient(600px 380px at 30% 30%, rgba(0,119,204,0.20), transparent 55%),
+    radial-gradient(600px 380px at 70% 30%, rgba(23,195,178,0.14), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.55)),
+    url('banner1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
+  overflow: hidden;
+}
+
+/* soft moving glow */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  background:
+    radial-gradient(closest-side, rgba(0,119,204,0.18), transparent 60%),
+    radial-gradient(closest-side, rgba(23,195,178,0.12), transparent 60%);
+  filter: blur(18px);
+  animation: glowMove 10s var(--ease) infinite alternate;
+  pointer-events: none;
+}
+@keyframes glowMove {
+  from { transform: translate(-4%, -2%) rotate(-2deg); }
+  to   { transform: translate(4%, 2%) rotate(2deg); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 24px;
+  color: #ffffff;
+}
+
+.hero-content {
+  max-width: 920px;
+  padding: 44px 28px;
+
+  border-radius: var(--radius-xl);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+
+  animation: heroIn .9s var(--ease) both;
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(16px) scale(.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.hero-tagline {
+  font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+  font-weight: 900;
+  margin: 0 0 14px;
+  letter-spacing: -0.6px;
+  background: linear-gradient(90deg, #ffffff, #dbeafe, #fde68a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-overlay h1 {
+  font-size: clamp(1.0rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  margin: 0 auto 26px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.90);
+  max-width: 70ch;
+}
+
+/* HERO BUTTONS */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  font-weight: 800;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+  will-change: transform;
+}
+
+/* Keep your naming but modernize look */
+.btn-primary,
+.btn-outline {
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, rgba(0,58,143,0.95), rgba(0,119,204,0.90), rgba(23,195,178,0.85));
+  color: #ffffff;
+  box-shadow: 0 18px 45px rgba(0,58,143,0.25);
+}
+.btn-outline {
+  background: rgba(255,255,255,0.10);
+  color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-outline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 55px rgba(0,0,0,0.28);
+  border-color: rgba(255,255,255,0.34);
+}
+
+/* ===============================
+   PROMO SLIDESHOW (Polished)
+================================ */
+.promo-hero {
+  position: relative;
+  width: 100%;
+  max-height: 520px;
+  overflow: hidden;
+  margin-top: 42px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.promo-slides img {
+  width: 100%;
+  display: none;
+  object-fit: cover;
+  height: 520px;
+  transform: scale(1.02);
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 12px 14px;
+  margin-top: -22px;
+  color: white;
+  font-weight: 900;
+  font-size: 22px;
+  background: rgba(15,23,42,0.55);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 999px;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform .2s var(--ease), background .2s var(--ease);
+}
+.prev:hover, .next:hover { transform: translateY(-2px); background: rgba(15,23,42,0.68); }
+.prev { left: 16px; }
+.next { right: 16px; }
+
+.promo-slides img.active {
+  display: block;
+  animation: fadeSlide 1s ease-in-out;
+}
+@keyframes fadeSlide {
+  from { opacity: 0.4; transform: scale(1.05); }
+  to   { opacity: 1; transform: scale(1.02); }
+}
+
+/* ===============================
+   WHY SUNDANCE (Modern cards + reveal)
+================================ */
+.why-sundance {
+  padding: 90px 0;
+  background: transparent;
+  text-align: center;
+}
+
+.why-sundance h2 {
+  font-size: clamp(1.9rem, 2.4vw, 2.35rem);
+  margin-bottom: 44px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  color: var(--dark-text);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+.feature-card {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+
+  opacity: 0;
+  transform: translateY(18px);
+  animation: cardIn .8s var(--ease) forwards;
+}
+
+/* Stagger */
+.feature-card:nth-child(1){ animation-delay: .05s; }
+.feature-card:nth-child(2){ animation-delay: .10s; }
+.feature-card:nth-child(3){ animation-delay: .15s; }
+.feature-card:nth-child(4){ animation-delay: .20s; }
+.feature-card:nth-child(5){ animation-delay: .25s; }
+.feature-card:nth-child(6){ animation-delay: .30s; }
+
+@keyframes cardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow);
+}
+
+.feature-card .icon {
+  font-size: 2.3rem;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  font-size: 1.18rem;
+  margin-bottom: 8px;
+  color: var(--primary-blue);
+  font-weight: 900;
+}
+
+.feature-card p {
+  color: var(--muted-text);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* Keep your old class support */
+.feature-card.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===============================
+   MARKDOWN CONTENT STYLING (Polished)
+================================ */
+article {
+  padding: 70px 20px;
+}
+
+article h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 950;
+  text-align: center;
+  margin-bottom: 20px;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+article h1 + p,
+article p {
+  max-width: 860px;
+  margin: 0 auto 18px;
+  font-size: 1.08rem;
+  color: var(--muted-text);
+  text-align: center;
+}
+
+article h2 {
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  font-weight: 900;
+  color: var(--dark-text);
+  text-align: center;
+  margin: 80px 0 30px;
+  letter-spacing: -0.3px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: headingFade 0.8s ease forwards;
+}
+article h2::after {
+  content: "";
+  display: block;
+  width: 92px;
+  height: 4px;
+  background: var(--grad);
+  margin: 14px auto 0;
+  border-radius: 999px;
+}
+
+@keyframes headingFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+article ul {
+  max-width: 820px;
+  margin: 0 auto 30px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+article ul li {
+  font-size: 1.05rem;
+  padding: 14px 14px 14px 46px;
+  color: var(--dark-text);
+  position: relative;
+
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  box-shadow: 0 10px 22px rgba(2,6,23,0.06);
+}
+
+article ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--grad);
+  color: white;
+  font-weight: 900;
+}
+
+/* ===============================
+   FOOTER (Modern)
+================================ */
+.site-footer {
+  background: linear-gradient(180deg, rgba(0,58,143,0.95), rgba(0,58,143,0.88));
+  color: #ffffff;
+  padding: 70px 20px 30px;
+  margin-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(closest-side, rgba(0,119,204,0.35), transparent 60%),
+    radial-gradient(closest-side, rgba(242,194,0,0.25), transparent 60%);
+  filter: blur(26px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-column {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+  transition: transform .25s var(--ease);
+}
+.footer-column:hover { transform: translateY(-4px); }
+
+.footer-column h3 {
+  font-size: 1.0rem;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+  text-transform: uppercase;
+}
+
+.footer-column p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.88);
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.82);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   COMPARISON TABLE (Modern)
+================================ */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  color: var(--dark-text);
+  background: rgba(255,255,255,0.92);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 12px 15px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.comparison-table th {
+  background: linear-gradient(90deg, rgba(0,58,143,0.95), rgba(0,119,204,0.90));
+  color: #fff;
+  font-weight: 900;
+}
+
+.comparison-table td { background-color: #ffffff; }
+.comparison-table tr:nth-child(even) td { background-color: #f6f8fc; }
+.comparison-table tr:hover td { background-color: rgba(0,119,204,0.08); }
+
+/* Responsive table */
+@media screen and (max-width: 768px) {
+  .comparison-table,
+  .comparison-table thead,
+  .comparison-table tbody,
+  .comparison-table th,
+  .comparison-table td,
+  .comparison-table tr { display: block; width: 100%; }
+
+  .comparison-table tr { margin-bottom: 1rem; }
+  .comparison-table td {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    padding-left: 50%;
+  }
+  .comparison-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+}
+
+/* ===============================
+   CITYWIDE / RENTALS / SERVICES / CONTACT
+   (Keep your layout but modernize surfaces)
+================================ */
+.citywide-coverage,
+.rentals-section,
+.services-section,
+.contact-section {
+  padding: 85px 20px;
+  background: transparent;
+}
+
+.citywide-coverage h1,
+.rentals-section h1,
+.services-section h1,
+.contact-section h1 {
+  color: var(--dark-text);
+  font-weight: 950;
+  letter-spacing: -0.4px;
+}
+
+.citywide-coverage p,
+.rentals-section p,
+.services-section p,
+.contact-section p {
+  color: var(--muted-text);
+}
+
+/* Forms */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 12px;
+  box-shadow: 0 10px 22px rgba(2,6,23,0.06);
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(0,119,204,0.35);
+  box-shadow: 0 0 0 5px rgba(0,119,204,0.12);
+}
+
+/* ===============================
+   MOBILE NAV + DROPDOWN
+================================ */
+@media (max-width: 768px) {
+  /* Slide-in panel (keep your behavior but modernize) */
+  .site-nav ul.nav-links {
+    position: fixed;
+    top: 0;
+    left: -290px;
+    width: 290px;
+    height: 100vh;
+    padding: 92px 14px 18px;
+    gap: 10px;
+    flex-direction: column;
+
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-right: 1px solid rgba(0,0,0,0.10);
+    border-radius: 0 22px 22px 0;
+    box-shadow: var(--shadow);
+
+    opacity: 1;
+    pointer-events: auto;
+    transition: left 0.28s var(--ease);
+    z-index: 5000;
+  }
+
+  .site-nav ul.nav-links.active { left: 0; }
+
+  .site-nav ul.nav-links li a {
+    display: block;
+    width: 100%;
+    padding: 14px 14px;
+    border-radius: 14px;
+    background: rgba(0,119,204,0.08);
+    border-color: rgba(0,119,204,0.14);
+  }
+
+  .hamburger {
+    display: flex;
+    position: relative; /* no absolute needed */
+    z-index: 6000;
+  }
+
+  /* Mobile dropdown inline */
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: transparent;
+    border: 0;
+    padding: 6px 0 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+  .has-dropdown.open .dropdown-menu { display: block; }
+
+  .dropdown-menu li a {
+    background: rgba(0,119,204,0.06);
+    border: 1px solid rgba(0,119,204,0.12);
+    color: rgba(15,23,42,0.85);
+  }
+
+  /* Hero mobile */
+  .hero-banner { height: 72vh; min-height: 460px; }
+  .hero-content { padding: 22px 16px; max-width: 92%; }
+  .hero-overlay h1 { font-size: 1.05rem; max-width: 34ch; }
+  .hero-buttons { gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .hero-tagline { font-size: 2.15rem; }
+  .logo-container img { height: 74px; }
+  .top-bar-container { flex-direction: column; align-items: flex-start; }
+}
+
+/* =========================================================
+   EXTRA REFRESH + TILE DESIGN UPGRADE (Paste at bottom)
+   - Premium tiles with gradient border + shine + hover glow
+   - Better spacing, stronger typography, modern motion
+========================================================= */
+
+/* Slight global polish */
+.container { padding: 1.4rem; }
+.why-sundance { padding: 100px 0; }
+.why-sundance h2 { margin-bottom: 52px; }
+
+/* ---------- FEATURE TILES (cards) ---------- */
+.features-grid { gap: 20px; }
+
+/* Make cards feel like “premium tiles” */
+.feature-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 18px 45px rgba(2,6,23,0.10);
+
+  transform: translateY(18px);
+  transition:
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease),
+    border-color .35s var(--ease),
+    filter .35s var(--ease);
+}
+
+/* Gradient ring border using pseudo element */
+.feature-card::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius: 22px;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(0,58,143,0.55),
+    rgba(0,119,204,0.40),
+    rgba(23,195,178,0.35),
+    rgba(242,194,0,0.25)
+  );
+  
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events:none;
+  opacity: 0.6;
+}
+
+/* Soft glow blob */
+.feature-card::after{
+  content:"";
+  position:absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  top: -140px;
+  right: -140px;
+  background:
+    radial-gradient(circle at center,
+      rgba(0,119,204,0.22),
+      rgba(23,195,178,0.12),
+      transparent 65%);
+  filter: blur(2px);
+  opacity: 0.8;
+  transition: transform .45s var(--ease), opacity .45s var(--ease);
+  pointer-events:none;
+}
+
+/* Shine sweep on hover */
+.feature-card .tile-shine{ display:none; } /* (in case you add later) */
+.feature-card:hover{
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 28px 70px rgba(2,6,23,0.14);
+  border-color: rgba(0,119,204,0.18);
+}
+.feature-card:hover::after{
+  transform: translate(-16px, 16px) scale(1.05);
+  opacity: 1;
+}
+
+/* Add a subtle “top sheen” overlay */
+.feature-card .icon,
+.feature-card h3,
+.feature-card p { position: relative; z-index: 1; }
+
+.feature-card .icon{
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 1.65rem;
+  margin: 0 auto 14px;
+
+  background: linear-gradient(135deg,
+    rgba(0,58,143,0.10),
+    rgba(0,119,204,0.10),
+    rgba(23,195,178,0.10)
+  );
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 14px 26px rgba(2,6,23,0.08);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+.feature-card:hover .icon{
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 0 18px 34px rgba(2,6,23,0.12);
+}
+
+.feature-card h3{
+  font-size: 1.18rem;
+  font-weight: 950;
+  letter-spacing: -0.25px;
+}
+
+.feature-card p{
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--muted-text);
+}
+
+/* “Press” interaction (feels modern) */
+.feature-card:active{
+  transform: translateY(-6px) scale(0.995);
+}
+
+/* ---------- ARTICLE LIST ITEMS (make them tiles too) ---------- */
+article ul{
+  gap: 12px;
+}
+
+article ul li{
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 16px 36px rgba(2,6,23,0.08);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+article ul li:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 50px rgba(2,6,23,0.12);
+}
+
+/* Make the bullet feel more premium */
+article ul li::before{
+  border-radius: 10px !important;
+  box-shadow: 0 14px 26px rgba(0,58,143,0.18) !important;
+}
+
+/* ---------- FOOTER COLUMNS (premium tiles) ---------- */
+.footer-column{
+  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-column::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:
+    radial-gradient(closest-side, rgba(242,194,0,0.20), transparent 60%),
+    radial-gradient(closest-side, rgba(0,119,204,0.18), transparent 60%);
+  filter: blur(22px);
+  opacity: 0.35;
+  pointer-events:none;
+}
+
+.footer-column:hover{
+  transform: translateY(-6px);
+}
+
+/* ---------- Nav bar refresh (more premium) ---------- */
+.site-nav ul.nav-links{
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0 20px 48px rgba(2,6,23,0.10);
+}
+
+.site-nav ul.nav-links li a{
+  font-weight: 800;
+}
+
+.site-nav ul.nav-links li a:hover{
+  background: rgba(0,119,204,0.10);
+}
+
+/* ---------- Buttons refresh ---------- */
+.btn{
+  letter-spacing: .2px;
+}
+
+.btn-primary{
+  box-shadow: 0 22px 55px rgba(0,58,143,0.22);
+}
+
+.btn-outline{
+  box-shadow: 0 18px 45px rgba(0,0,0,0.16);
+}
+
+/* ---------- Mobile: keep tiles feeling clean ---------- */
+@media (max-width: 768px){
+  .feature-card{
+    border-radius: 18px;
+  }
+  .feature-card::before{
+    border-radius: 18px;
+  }
+}
+.feature-card, article h2, article p, article li{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+.is-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+/* =========================================================
+   MOBILE FIX PATCH (paste at bottom)
+   - Hero buttons visibility + spacing
+   - Footer tiles less "vertical" on mobile
+========================================================= */
+
+/* --- HERO MOBILE: ensure buttons always fit --- */
+@media (max-width: 768px){
+  /* Give hero a bit more usable height and reduce padding */
+  .hero-banner{
+    height: auto;                 /* let content decide */
+    min-height: 560px;            /* enough room for buttons */
+    padding: 26px 0;              /* breathing room */
+  }
+
+  .hero-overlay{
+    padding: 18px;                /* tighter */
+  }
+
+  .hero-content{
+    padding: 18px 14px !important;
+    max-width: 94% !important;
+    border-radius: 18px;
+  }
+
+  .hero-tagline{
+    font-size: clamp(1.55rem, 6vw, 2.1rem) !important;
+    margin-bottom: 10px !important;
+  }
+
+  .hero-overlay h1{
+    font-size: 1rem !important;
+    margin-bottom: 14px !important;
+    line-height: 1.4 !important;
+    max-width: 38ch !important;
+  }
+
+  /* Buttons: stack cleanly + full width */
+  .hero-buttons{
+    gap: 10px !important;
+    margin-top: 10px !important;
+  }
+
+  .hero-buttons .btn{
+    width: 100%;
+    max-width: 420px;             /* still looks nice on big phones */
+    padding: 13px 18px !important;
+    justify-content: center;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 420px){
+  .hero-banner{ min-height: 520px; }
+  .hero-content{ padding: 16px 12px !important; }
+  .hero-overlay h1{ font-size: 0.98rem !important; }
+}
+
+/* --- FOOTER MOBILE: make tiles compact + less vertical --- */
+@media (max-width: 768px){
+  .site-footer{
+    padding: 46px 14px 22px !important;
+  }
+
+  /* Two columns on mobile instead of one long vertical stack */
+  .footer-container{
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    text-align: left !important;
+  }
+
+  .footer-column{
+    padding: 14px !important;
+    border-radius: 16px !important;
+    min-height: 140px;            /* keeps boxes visually even */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .footer-column h3{
+    font-size: 0.95rem !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .footer-column p{
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Very small: go back to 1 column when 2 becomes cramped */
+@media (max-width: 430px){
+  .footer-container{
+    grid-template-columns: 1fr !important;
+  }
+  .footer-column{
+    min-height: auto;
+  }
+}
+
+/* --- MOBILE NAV POSITIONING FIX (optional but helps) --- */
+@media (max-width: 768px){
+  /* If your header/top-bar heights vary, this prevents overlap */
+  .site-header{ top: 0 !important; }  /* keeps sticky simple on mobile */
+  .top-bar{ position: relative; }     /* avoid stacking weirdness */
+
+  /* If you prefer keeping sticky top-bar, remove the two lines above. */
+}
+/* =========================================================
+   FIX: Make BOTH buttons always visible (btn-primary + btn-outline)
+   Paste at bottom of style.css
+========================================================= */
+
+/* Shared button base */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 800;
+  border-radius: 999px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+/* Primary stays bold */
+.btn-primary{
+  background: linear-gradient(90deg, rgba(0,58,143,0.95), rgba(0,119,204,0.90));
+  color: #fff !important;
+  border: 1px solid rgba(0,119,204,0.30);
+  box-shadow: 0 18px 45px rgba(0,58,143,0.18);
+}
+
+/* Outline must be visible on LIGHT backgrounds */
+.btn-outline{
+  background: #ffffff !important;                 /* key: not transparent */
+  color: var(--primary-blue) !important;
+  border: 2px solid rgba(0,58,143,0.28) !important;
+  box-shadow: 0 14px 30px rgba(2,6,23,0.10);
+}
+
+/* Hover states (both look premium) */
+.btn-primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 55px rgba(0,58,143,0.24);
+  border-color: rgba(0,119,204,0.40);
+}
+
+.btn-outline:hover{
+  transform: translateY(-2px);
+  background: rgba(242,194,0,0.18) !important;
+  border-color: rgba(242,194,0,0.55) !important;
+  color: var(--primary-blue) !important;
+  box-shadow: 0 22px 55px rgba(2,6,23,0.14);
+}
+
+/* Optional: if a section has a DARK background, ensure outline stays visible */
+.hero-banner .btn-outline,
+.site-footer .btn-outline{
+  background: rgba(255,255,255,0.14) !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,0.40) !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+}
+
+.hero-banner .btn-outline:hover,
+.site-footer .btn-outline:hover{
+  background: rgba(255,255,255,0.22) !important;
+  border-color: rgba(255,255,255,0.55) !important;
+}

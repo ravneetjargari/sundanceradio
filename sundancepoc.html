@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SundancePOC | Sundance Radio</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- OPTIONAL: Auto redirect after 2 seconds (comment out if you want the landing page only) -->
+  <!-- <meta http-equiv="refresh" content="2;url=https://ws.realptt.com/login"> -->
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-container">
+      <a href="tel:14033012700" class="top-bar-item">
+        <span class="icon">📞</span>
+        <span class="text">403-301-2700</span>
+      </a>
+
+      <a href="mailto:info@sundanceradio.ca" class="top-bar-item">
+        <span class="icon">✉️</span>
+        <span class="text">info@sundanceradio.ca</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo-container">
+        <img src="logo.png" alt="Sundance Radio Logo" class="logo-image">
+      </div>
+
+      <nav class="site-nav">
+        <!-- Hamburger -->
+        <button class="hamburger" aria-label="Toggle Menu">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+
+          <li class="has-dropdown">
+            <a href="#" class="dropdown-toggle">Radios</a>
+            <ul class="dropdown-menu">
+              <li><a href="radios-digital.html">Digital Radios</a></li>
+              <li><a href="radios-analog.html">Analog Radios</a></li>
+            </ul>
+          </li>
+
+          <li><a href="citywide.html">City Wide</a></li>
+          <li><a href="rentals.html">Rentals</a></li>
+          <li><a href="service.html">Service</a></li>
+          <li><a href="accessories.html">Accessories</a></li>
+          <li><a class="active" href="sundancepoc.html">SundancePOC</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-banner" style="
+    height: 75vh; min-height: 540px;
+    background-image:
+      radial-gradient(700px 420px at 25% 30%, rgba(0,119,204,0.22), transparent 55%),
+      radial-gradient(650px 420px at 75% 25%, rgba(242,194,0,0.14), transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.66)),
+      url('banner1.jpg');
+  ">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <p class="hero-tagline">SundancePOC</p>
+        <h1>
+          Push-to-Talk over Cellular (PoC) for instant team communication—voice, groups, and management
+          from a web console.
+        </h1>
+
+        <div class="hero-buttons">
+          <!-- This is the “same destination” concept as the REAL-PTT page login -->
+          <a class="btn btn-primary" href="https://realptt.com/ptt/?PROXYID=689" target="_blank" rel="noopener">
+            MANAGEMENT LOGIN
+          </a>
+          <a class="btn btn-outline" href="https://ws.realptt.com">
+            DISPATCH LOGIN
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="why-sundance">
+    <div class="container">
+      <h2>What is SundancePOC?</h2>
+      <p style="max-width: 900px; margin: 0 auto 30px; text-align:center;">
+        SundancePOC is a cellular-based Push-to-Talk solution designed for businesses that need fast,
+        reliable communication without the range limits of traditional radio coverage. Manage users,
+        groups, and operations through an online portal.
+      </p>
+
+      <div class="features-grid" style="margin-top: 25px;">
+        <div class="feature-card">
+          <div class="icon">⚡</div>
+          <h3>Instant PTT</h3>
+          <p>One-touch group communication with fast call setup and clear voice.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">👥</div>
+          <h3>Teams & Groups</h3>
+          <p>Create and manage talk groups for departments, sites, or shifts.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon">🗺️</div>
+          <h3>Operations View</h3>
+          <p>Web-based management for users, groups, and operational control.</p>
+        </div>
+      </div>
+
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI “LOGIN TILE” like the reference page vibe -->
+  
+
+  
+
+  <!-- FOOTER (matches your main layout) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>About Us</h3>
+        <p>
+          Sundance Radio has been a leader in Two-way Radio Communications
+          for both Retail and Corporate clients in Calgary for 25+ years.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Location</h3>
+        <p>
+          Bay A, 8240 31 Street SE<br>
+          Calgary, Alberta, Canada
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Office Hours</h3>
+        <p>
+          Mon–Fri: 8:00am – 5:00pm<br>
+          Sat & Sun: Closed
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © Sundance Radio Communications
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
