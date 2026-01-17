@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "content/promotions"   # Where images are saved
+public_folder: "/content/promotions" # URL path for images
+
+collections:
+  - name: "promotions"
+    label: "Promotional Images"
+    folder: "content/promotions"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
