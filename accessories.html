@@ -3,202 +3,297 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sundance Radio | Accessories</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>X-Zone | Accessories Catalog</title>
 
-  <!-- Accessories page-only CSS (keeps your global theme, uses your variables) -->
+  <!-- If you have a global stylesheet, you can remove this line -->
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+
   <style>
-    /* ===============================
-       ACCESSORIES PAGE (matches your theme)
-    ================================ */
+    /* =========================================================
+       X-ZONE — FUTURISTIC RED THEME (standalone)
+       Mobile-first, red accents, dark glass panels
+    ========================================================== */
 
-    .accessories-hero {
-      padding: 42px 0 10px;
+    :root{
+      --bg: #070A10;
+      --bg2:#0A0F1A;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+
+      --red: #ff2d2d;
+      --red2:#ff4d4d;
+      --cyan:#3CE6FF;
+
+      --shadow: 0 22px 70px rgba(0,0,0,0.55);
+      --shadowSoft: 0 14px 45px rgba(0,0,0,0.45);
+
+      --ease: cubic-bezier(.2,.9,.2,1);
+      --radius: 22px;
+      --radius2: 18px;
+
+      --max: 1200px;
     }
 
-    .accessories-hero h1 {
-      margin: 0;
-      font-size: clamp(2.0rem, 3.2vw, 3rem);
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 18% 10%, rgba(255,45,45,0.18), transparent 60%),
+        radial-gradient(900px 520px at 80% 12%, rgba(60,230,255,0.10), transparent 55%),
+        radial-gradient(900px 520px at 45% 90%, rgba(255,45,45,0.12), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      min-height: 100vh;
+    }
+
+    a{ color: inherit; }
+    .container{
+      width: min(var(--max), calc(100% - 2.2rem));
+      margin: 0 auto;
+    }
+
+    /* ===== HEADER ===== */
+    .header{
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(7,10,16,0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    /* Make header two-row: Brand on top, nav on its own line */
+.header-stack{
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Bigger X-Zone text */
+.brand-title .name{
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 980;
+  letter-spacing: -0.7px;
+}
+
+/* Slightly larger tagline too (optional) */
+.brand-title .tagline{
+  font-size: 0.95rem;
+}
+
+/* Nav becomes full-width on its own line */
+.nav-row{
+  width: 100%;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* On desktop, keep everything clean and aligned */
+@media (min-width: 900px){
+  .header-stack{
+    align-items: flex-start;
+  }
+  .nav-row{
+    margin-top: 12px;
+  }
+}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      text-decoration:none;
+    }
+
+    .brand .logo{
+      width: clamp(170px, 22vw, 360px);
+  height: clamp(54px, 7vw, 96px);
+      border-radius: 14px;
+      background: rgb(236, 226, 226);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadowSoft);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+
+    .brand .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display:block;
+      padding: 6px;
+    }
+
+    .brand-title{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.05;
+    }
+
+    .brand-title .name{
       font-weight: 950;
-      letter-spacing: -0.6px;
-      background: var(--grad);
+      letter-spacing: -0.5px;
+      font-size: 1.05rem;
+    }
+
+    .brand-title .tagline{
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    /* ===== NAV (category-only) ===== */
+    .nav{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .pill{
+      flex: 0 0 auto;
+      text-decoration:none;
+      font-weight: 900;
+      font-size: 0.90rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.35);
+      white-space: nowrap;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,45,45,0.35);
+      background: rgba(255,45,45,0.10);
+    }
+    .pill.active{
+      border-color: rgba(255,45,45,0.55);
+      background:
+        radial-gradient(380px 140px at 50% 0%, rgba(255,45,45,0.30), transparent 70%),
+        rgba(255,255,255,0.06);
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      padding: 34px 0 14px;
+    }
+    .hero h1{
+      margin:0;
+      font-size: clamp(2.05rem, 5.2vw, 3.2rem);
+      font-weight: 980;
+      letter-spacing: -1px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.92), rgba(255,45,45,0.92), rgba(60,230,255,0.82));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
-
-    .accessories-hero p {
+    .hero p{
       margin: 10px 0 0;
-      max-width: 78ch;
-      color: var(--muted-text);
-      font-size: 1.06rem;
+      max-width: 75ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.6;
     }
 
-    /* PAGE-SPECIFIC CATEGORY BAR (second navbar) */
-    .category-bar {
-      position: sticky;
-      top: 132px; /* top-bar (sticky) + header (sticky). adjust if needed */
-      z-index: 3200;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* On mobile, your header shifts; keep this simpler */
-    @media (max-width: 768px) {
-      .category-bar { top: 0; }
-    }
-
-    .category-bar .container {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 10px 1.25rem;
-      scroll-snap-type: x mandatory;
-    }
-
-    .category-pill {
-      flex: 0 0 auto;
-      scroll-snap-align: start;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 14px;
-
-      border-radius: 999px;
-      text-decoration: none;
-
-      color: rgba(15,23,42,0.78);
-      font-weight: 800;
-      letter-spacing: .2px;
-
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(0,0,0,0.08);
-      box-shadow: var(--shadow-soft);
-
-      transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
-    }
-
-    .category-pill:hover {
-      transform: translateY(-1px);
-      background: rgba(0,119,204,0.08);
-      border-color: rgba(0,119,204,0.18);
-    }
-
-    .category-pill.active {
-      color: var(--dark-text);
-      background: rgba(0,58,143,0.10);
-      border-color: rgba(0,58,143,0.18);
-    }
-
-    /* About card (uses same “tile” vibe as your cards) */
-    .about-xzone {
-      padding: 22px 0 8px;
-    }
-
-    .about-card {
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 22px;
-      box-shadow: var(--shadow-soft);
-      padding: 22px;
-      overflow: hidden;
+    .hero-card{
+      margin-top: 16px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadowSoft);
+      overflow:hidden;
       position: relative;
+      padding: 18px;
     }
-
-    .about-card::after{
+    .hero-card::before{
       content:"";
       position:absolute;
-      inset:-45%;
+      inset:-40%;
       background:
-        radial-gradient(closest-side, rgba(0,119,204,0.18), transparent 60%),
-        radial-gradient(closest-side, rgba(242,194,0,0.16), transparent 60%);
-      filter: blur(24px);
-      opacity: 0.35;
-      pointer-events: none;
+        radial-gradient(closest-side, rgba(255,45,45,0.22), transparent 62%),
+        radial-gradient(closest-side, rgba(60,230,255,0.14), transparent 62%);
+      filter: blur(26px);
+      opacity: 0.55;
+      pointer-events:none;
     }
+    .hero-card strong{ color: rgba(255,255,255,0.92); }
+    .hero-card p{ position:relative; z-index:1; margin:0; color: var(--muted); }
 
-    .about-card h2 {
-      margin: 0 0 12px;
-      font-size: 1.35rem;
-      font-weight: 950;
-      color: var(--dark-text);
-      position: relative;
-      z-index: 1;
+    /* ===== SECTIONS ===== */
+    main{ padding: 8px 0 34px; }
+    .section{
+      padding: 26px 0 6px;
     }
-
-    .about-card p {
-      margin: 0 0 12px;
-      color: var(--muted-text);
-      position: relative;
-      z-index: 1;
-    }
-
-    .about-card p strong {
-      color: var(--dark-text);
-    }
-
-    .about-card p:last-child { margin-bottom: 0; }
-
-    /* Sections */
-    .acc-section {
-      padding: 34px 0 10px;
-    }
-
-    .acc-section .section-head {
-      display: flex;
+    .section-head{
+      display:flex;
       flex-direction: column;
       gap: 6px;
       margin-bottom: 14px;
     }
-
-    .acc-section h2 {
-      margin: 0;
-      font-size: 1.45rem;
+    .section h2{
+      margin:0;
+      font-size: 1.28rem;
       font-weight: 950;
-      letter-spacing: -0.3px;
-      color: var(--dark-text);
+      letter-spacing: -0.4px;
+    }
+    .section .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 0.98rem;
     }
 
-    .acc-section .sub {
-      margin: 0;
-      color: var(--muted-text);
-      font-size: 1.0rem;
-    }
+    /* anchor offset so sticky header doesn't hide it */
+    .anchor-offset{ scroll-margin-top: 96px; }
 
-    /* Product grid + cards (premium tiles like your feature-card) */
-    .product-grid {
-      display: grid;
+    /* ===== GRID ===== */
+    .grid{
+      display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
-      margin-top: 12px;
+      gap: 14px;
     }
 
-    .product-card {
+    .card{
       grid-column: span 12;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 22px;
-      box-shadow: 0 18px 45px rgba(2,6,23,0.10);
-      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadowSoft);
       position: relative;
-      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+      transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
     }
 
-    /* Gradient ring border (like your premium tile patch) */
-    .product-card::before{
+    .card::before{
       content:"";
       position:absolute;
       inset:-1px;
-      border-radius: 22px;
+      border-radius: var(--radius);
       padding: 1px;
       background: linear-gradient(135deg,
-        rgba(0,58,143,0.55),
-        rgba(0,119,204,0.40),
-        rgba(23,195,178,0.35),
-        rgba(242,194,0,0.25)
+        rgba(255,45,45,0.45),
+        rgba(255,255,255,0.10),
+        rgba(60,230,255,0.25)
       );
       -webkit-mask:
         linear-gradient(#000 0 0) content-box,
@@ -209,347 +304,251 @@
       opacity: 0.55;
     }
 
-    .product-card:hover{
-      transform: translateY(-8px);
+    .card:hover{
+      transform: translateY(-6px);
+      border-color: rgba(255,45,45,0.25);
       box-shadow: var(--shadow);
-      border-color: rgba(0,119,204,0.18);
     }
 
-    .product-media {
-      aspect-ratio: 16 / 9;
+    .media{
+      aspect-ratio: 16 / 10;
       background:
-        radial-gradient(600px 380px at 30% 30%, rgba(0,119,204,0.12), transparent 55%),
-        radial-gradient(600px 380px at 70% 30%, rgba(23,195,178,0.10), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.12));
-      display: grid;
-      place-items: center;
+        radial-gradient(600px 340px at 30% 25%, rgba(255,45,45,0.18), transparent 55%),
+        radial-gradient(600px 340px at 70% 25%, rgba(60,230,255,0.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.18));
+      display:grid;
+      place-items:center;
+      position: relative;
     }
 
-    .product-media img {
-      width: 100%;
-      height: 100%;
+    .media img{
+      width:100%;
+      height:100%;
       object-fit: cover;
-      display: block;
+      display:block;
     }
 
-    .product-body {
-      padding: 16px;
-      display: grid;
+    .body{
+      padding: 14px 14px 16px;
+      display:grid;
       gap: 8px;
       position: relative;
       z-index: 1;
     }
 
-    .product-name {
-      margin: 0;
-      font-size: 1.05rem;
+    .name{
+      margin:0;
       font-weight: 950;
-      color: var(--dark-text);
-      letter-spacing: -0.2px;
+      font-size: 1.02rem;
+      letter-spacing: -0.3px;
     }
 
-    .product-desc {
-      margin: 0;
-      color: var(--muted-text);
-      font-size: 0.98rem;
+    .desc{
+      margin:0;
+      color: var(--muted);
+      font-size: 0.96rem;
       line-height: 1.55;
     }
 
-    .product-tags {
-      display: flex;
+    .tags{
+      display:flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 2px;
     }
-
-    .tag {
+    .tag{
       font-size: 0.78rem;
-      font-weight: 800;
+      font-weight: 900;
       padding: 7px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.08);
-      background: rgba(255,255,255,0.72);
-      box-shadow: 0 10px 22px rgba(2,6,23,0.05);
-      color: rgba(15,23,42,0.78);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.82);
     }
 
-    .product-actions {
-      display: flex;
-      gap: 12px;
+    .actions{
+      display:flex;
+      gap: 10px;
       flex-wrap: wrap;
       margin-top: 6px;
     }
 
-    /* Reuse your .btn styles; add small safety */
-    .product-actions .btn {
-      padding: 11px 16px;
-      font-size: 0.95rem;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      font-weight: 950;
+      letter-spacing: .2px;
+      border-radius: 14px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,45,45,0.35);
+      background: rgba(255,45,45,0.12);
     }
 
-    @media (min-width: 640px) {
-      .product-card { grid-column: span 6; }
-    }
-    @media (min-width: 980px) {
-      .product-card { grid-column: span 4; }
-    }
-
-    /* Anchor offset so sticky bars don’t hide headings */
-    .anchor-offset { scroll-margin-top: 180px; }
-    @media (max-width: 768px) {
-      .anchor-offset { scroll-margin-top: 20px; }
+    .btn.primary{
+      border-color: rgba(255,45,45,0.55);
+      background:
+        radial-gradient(520px 220px at 50% 0%, rgba(255,45,45,0.40), transparent 65%),
+        rgba(255,255,255,0.06);
     }
 
-    /* Empty state */
-    .empty-state {
+    .empty{
       grid-column: 1 / -1;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 18px;
-      box-shadow: var(--shadow-soft);
-      padding: 18px;
-      color: var(--muted-text);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 14px;
+      color: var(--muted);
     }
-    .empty-state strong { color: var(--dark-text); }
+
+    /* Responsive */
+    @media (min-width: 640px){
+      .card{ grid-column: span 6; }
+      .brand-title .name{ font-size: 1.10rem; }
+    }
+    @media (min-width: 980px){
+      .card{ grid-column: span 4; }
+    }
+
+    /* Footer */
+    .footer{
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 18px 0 26px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- ===============================
-       TOP CONTACT BAR (same classes)
-  ================================ -->
-  <div class="top-bar">
-    <div class="top-bar-container">
-      <a class="top-bar-item" href="tel:4033012700"><span class="icon">📞</span> 403-301-2700</a>
-      <a class="top-bar-item" href="mailto:info@sundanceradio.ca"><span class="icon">✉️</span> info@sundanceradio.ca</a>
-    </div>
-  </div>
-
-  <!-- ===============================
-       HEADER (same classes)
-  ================================ -->
-  <header class="site-header">
+  <!-- HEADER (logo + category nav only) -->
+  <header class="header">
     <div class="container">
-      <div class="logo-container">
-        <a href="index.html" aria-label="Sundance Radio Home">
-          <img src="logo.png" alt="Sundance Radio Logo" />
-        </a>
-      </div>
+      <div class="header-inner header-stack">
+  <a class="brand" href="#top" aria-label="X-Zone Home">
+    <span class="logo">
+      <img src="logo2.png" alt="X-Zone Logo" />
+    </span>
 
-  <nav class="site-nav">
-      <button class="hamburger" aria-label="Toggle Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <span class="brand-title">
+      <span class="name">X-Zone Technologies</span>
+      <span class="tagline">Two-Way Radio Accessories</span>
+    </span>
+  </a>
 
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li class="has-dropdown">
-            <a href="#" class="dropdown-toggle">Radios</a>
-            <ul class="dropdown-menu">
-            <li><a href="radios-digital.html">Digital Radios</a></li>
-            <li><a href="radios-analog.html">Analog Radios</a></li>
-        </ul>
-        </li>
-        <li><a href="citywide.html">City Wide</a></li>
-        <li><a href="rentals.html">Rentals</a></li>
-        <li><a href="service.html">Service</a></li>
-        <li><a href="accessories.html">Accessories</a></li>
-        <li><a href="sundancepoc.html">SundancePOC</a></li>
-      </ul>
-    </nav>
+  <nav class="nav nav-row" aria-label="Product categories">
+    <a class="pill" href="#poc-radio">POC</a>
+    <a class="pill" href="#charger">Chargers</a>
+    <a class="pill" href="#headset">Headsets</a>
+    <a class="pill" href="#cell-booster">Cell Boosters</a>
+    <a class="pill" href="#other-brands">Other</a>
+  </nav>
+</div>
+
     </div>
   </header>
 
-  <!-- ===============================
-       PAGE HERO
-  ================================ -->
-  <section class="accessories-hero">
+  <!-- HERO -->
+  <section class="hero" id="top">
     <div class="container">
-      <h1>Accessories</h1>
+      <h1>X-Zone Accessories Catalog</h1>
       <p>
-        Browse our accessory categories below. Built for demanding two-way radio environments, these products are organized so you can
-        quickly find the right fit for your team.
+        Empowering users with two-way radio accessories that work as hard as they do.
+        Browse by category, tap a product to request info, and add your images using the same SKU filenames.
       </p>
-    </div>
-  </section>
 
-  <!-- ===============================
-       SECOND NAV (page specific)
-  ================================ -->
-  <div class="category-bar" role="navigation" aria-label="Accessories categories">
-    <div class="container">
-      <a class="category-pill" href="#poc-radio">POC RADIO</a>
-      <a class="category-pill" href="#charger">Charger</a>
-      <a class="category-pill" href="#headset">Headset</a>
-      <a class="category-pill" href="#cell-booster">Cell Booster</a>
-      <a class="category-pill" href="#other-brands">Other brand product</a>
-    </div>
-  </div>
-
-  <!-- ===============================
-       ABOUT X-ZONE
-  ================================ -->
-  <section class="about-xzone">
-    <div class="container">
-      <div class="about-card">
-        <h2>About X-Zone</h2>
-        <p><strong>Empowering users with Two-Way Radio Accessories that work as hard as they do.</strong></p>
+      <div class="hero-card">
         <p>
-          With three decades of experience in demanding two-way radio environments, X-Zone Technologies specializes in designing and
-          supplying radio accessories for the wholesale communication accessory market. They offer durable and versatile communication
-          solutions tailored for active and harsh settings.
-        </p>
-        <p>
-          X-Zone's products are designed to compete with OEM accessories, providing customers with improved profit margins and end-users
-          with a high-quality product at a competitive price point.
+          <strong>About X-Zone:</strong>
+          With three decades of experience in demanding two-way radio environments, X-Zone Technologies designs and supplies durable
+          communication accessories for harsh, active settings—built to compete with OEM options while delivering strong value.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ===============================
-       PRODUCT SECTIONS
-  ================================ -->
+  <!-- SECTIONS -->
   <main>
-    <section id="poc-radio" class="acc-section anchor-offset">
+    <section id="poc-radio" class="section anchor-offset">
       <div class="container">
         <div class="section-head">
-          <h2>POC RADIO</h2>
+          <h2>POC</h2>
           <p class="sub">Push-to-Talk over Cellular accessories and devices.</p>
         </div>
-        <div class="product-grid" data-grid="poc-radio"></div>
+        <div class="grid" data-grid="poc-radio"></div>
       </div>
     </section>
 
-    <section id="charger" class="acc-section anchor-offset">
+    <section id="charger" class="section anchor-offset">
       <div class="container">
         <div class="section-head">
-          <h2>Charger</h2>
-          <p class="sub">Single, multi-unit, and vehicle charging solutions.</p>
+          <h2>Chargers</h2>
+          <p class="sub">Single, multi-unit, and fleet charging solutions.</p>
         </div>
-        <div class="product-grid" data-grid="charger"></div>
+        <div class="grid" data-grid="charger"></div>
       </div>
     </section>
 
-    <section id="headset" class="acc-section anchor-offset">
+    <section id="headset" class="section anchor-offset">
       <div class="container">
         <div class="section-head">
-          <h2>Headset</h2>
+          <h2>Headsets</h2>
           <p class="sub">Audio options for loud and busy environments.</p>
         </div>
-        <div class="product-grid" data-grid="headset"></div>
+        <div class="grid" data-grid="headset"></div>
       </div>
     </section>
 
-    <section id="cell-booster" class="acc-section anchor-offset">
+    <section id="cell-booster" class="section anchor-offset">
       <div class="container">
         <div class="section-head">
-          <h2>Cell Booster</h2>
+          <h2>Cell Boosters</h2>
           <p class="sub">Signal boosting products for improved coverage.</p>
         </div>
-        <div class="product-grid" data-grid="cell-booster"></div>
+        <div class="grid" data-grid="cell-booster"></div>
       </div>
     </section>
 
-    <section id="other-brands" class="acc-section anchor-offset">
+    <section id="other-brands" class="section anchor-offset">
       <div class="container">
         <div class="section-head">
-          <h2>Other brand product</h2>
-          <p class="sub">Additional accessories and popular items from trusted brands.</p>
+          <h2>Other</h2>
+          <p class="sub">Additional accessories and popular items.</p>
         </div>
-        <div class="product-grid" data-grid="other-brands"></div>
+        <div class="grid" data-grid="other-brands"></div>
       </div>
     </section>
   </main>
 
-  <!-- ===============================
-       FOOTER (matches your classes)
-  ================================ -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-column">
-        <h3>Sundance Radio</h3>
-        <p>Professional communication solutions, radios, accessories, rentals, and service—built for the field.</p>
-      </div>
-
-      <div class="footer-column">
-        <h3>Quick Links</h3>
-        <p>
-          <a href="index.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Home</a><br/>
-          <a href="digital.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Digital Radios</a><br/>
-          <a href="analog.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Analog Radios</a><br/>
-          <a href="accessories.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Accessories</a><br/>
-          <a href="service.html" style="color: rgba(255,255,255,0.9); text-decoration:none;">Service</a>
-        </p>
-      </div>
-
-      <div class="footer-column">
-        <h3>Contact</h3>
-        <p>
-          Phone: 403-301-2700<br/>
-          Email: info@sundanceradio.ca
-        </p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      © <span id="year"></span> Sundance Radio Communications
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> X-Zone Technologies
     </div>
   </footer>
 
-  <!-- ===============================
-       JS (hamburger + dropdown + products)
-  ================================ -->
   <script>
-  // Footer year
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+    // Footer year
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Mobile nav toggle (matches your CSS: .nav-links.active)
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector(".nav-links");
+    // =========================================================
+    // KEEP YOUR SAME PRODUCTS + SKUS + IMAGE NAMES
+    // Paste your full products array here (same items as before).
+    // =========================================================
 
-  if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("active");
-      hamburger.setAttribute("aria-expanded", String(open));
-    });
-
-    // Mobile dropdown behavior (your CSS expects .has-dropdown.open)
-    document.querySelectorAll(".has-dropdown .dropdown-toggle").forEach((toggle) => {
-      toggle.addEventListener("click", (e) => {
-        if (window.matchMedia("(max-width: 768px)").matches) {
-          e.preventDefault();
-          toggle.parentElement.classList.toggle("open");
-        }
-      });
-    });
-
-    // Close nav when clicking a link (mobile)
-    navLinks.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => {
-        if (window.matchMedia("(max-width: 768px)").matches) {
-          navLinks.classList.remove("active");
-          hamburger.setAttribute("aria-expanded", "false");
-        }
-      });
-    });
-  }
-
-  // ===============================
-  // PRODUCTS
-  // category must be: poc-radio, charger, headset, cell-booster, other-brands
-  // Images should be in the format: "<sku>.jpg"
-  // Examples: "15-14085.jpg" or "AM-406.jpg" or "sc-fusionpro-ca.jpg"
-  // ===============================
-
-  const products = [
-  // =========================
-  // X-ZONE (CHARGERS)
-  // =========================
-  {
+    const products = [
+      /* ✅ PASTE YOUR EXISTING 50 PRODUCTS HERE (unchanged) */
+       {
     sku: "15-14078",
     category: "charger",
     name: "X-Zone 12 Bank Charger for Kenwood 45L, 69L Battery",
@@ -890,149 +889,115 @@
   link: ""
 },
 
+    ];
 
-];
+    // =========================================================
+    // IMAGE EXTENSIONS (same idea you already had)
+    // Keep these exactly as your real files (png vs jpg).
+    // =========================================================
+    const IMAGE_EXT = {
+      "AM-411": "png",
+      "sc-fusionpro-ca": "png",
+      "SC-FUSION2GO5G-VEH": "png",
+      "SC-FUSION2GO3-CA": "png",
+      "scflare-3ca": "png",
+      "SC-INDOOR-DOME-5G": "png",
+      "sc-528w": "png",
+      "sc-288w": "png",
+      "SC-208W": "png",
+      "SC-DC-CIG-12V-5A": "png",
+      "SC-FME-WHIP": "png",
+      "SC110W": "png"
+    };
 
-// ✅ Total products in this array: 50
+    function imageFromSku(sku) {
+      if (!sku) return "";
+      const normalized = String(sku).replaceAll("/", "-");
+      const ext = IMAGE_EXT[sku] || IMAGE_EXT[normalized] || "jpg";
+      return "images/accessories/" + normalized + "." + ext;
+    }
 
+    function escapeHtml(str) {
+      return String(str || "").replace(/[&<>"']/g, (s) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[s]));
+    }
 
-// ✅ Totals after cleaning:
-// - Total products: 56
-// - Duplicate SKUs removed: SC-PSU-FUSION5S5X, SC-DC-CIG-12V-5A, SC-FUSION2GO-PSU, SC-FME-WHIP, SC110W, SC-NM-WHIP
-// - Kept SC-TAP-6DB-NF (removed the extra sc-6db-tap-nf duplicate)
-// - Kept SC-208W and removed SC-LOWPROFILE-MAG-3-8 (use the real SureCall SKU)
+    function renderProducts() {
+      const grids = document.querySelectorAll("[data-grid]");
+      const byCat = products.reduce((acc, p) => {
+        (acc[p.category] ||= []).push(p);
+        return acc;
+      }, {});
 
+      grids.forEach((grid) => {
+        const cat = grid.getAttribute("data-grid");
+        const list = byCat[cat] || [];
 
-const IMAGE_EXT = {
-  // CW / OPEK (and any other CW items you upload as PNG)
-  "AM-411": "png",
-  "sc-fusionpro-ca": "png",
-  "SC-FUSION2GO5G-VEH": "png",
-  "SC-FUSION2GO3-CA": "png",
-  "scflare-3ca": "png",
-  "SC-INDOOR-DOME-5G": "png",
-  "sc-528w": "png",
-  "sc-288w": "png",
-  "SC-208W": "png",
-  "SC-DC-CIG-12V-5A": "png",
-  "SC-FME-WHIP": "png",
-  "SC110W": "png",
-  // Add more CW SKUs here as you upload them
-};
+        if (!list.length) {
+          grid.innerHTML = `<div class="empty"><strong>No products in this category yet.</strong></div>`;
+          return;
+        }
 
+        grid.innerHTML = list.map((p) => {
+          const img = p.image && String(p.image).trim() ? p.image : imageFromSku(p.sku);
 
-  // If you want to automatically map image from sku, keep render using this:
-  function imageFromSku(sku) {
-  if (!sku) return "";
-  const ext = IMAGE_EXT[sku] || "jpg"; // default stays JPG
-  return "images/accessories/" + String(sku).replaceAll("/", "-") + "." + ext;
-}
+          const mailLink = `mailto:info@sundanceradio.ca?subject=${encodeURIComponent(
+            "Accessory Request - " + (p.name || "")
+          )}`;
 
-
-
-  function escapeHtml(str) {
-    return String(str || "").replace(/[&<>"']/g, (s) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[s]));
-  }
-
-  function renderProducts() {
-    const grids = document.querySelectorAll("[data-grid]");
-    const byCat = products.reduce((acc, p) => {
-      (acc[p.category] ||= []).push(p);
-      return acc;
-    }, {});
-
-    grids.forEach((grid) => {
-      const cat = grid.getAttribute("data-grid");
-      const list = byCat[cat] || [];
-
-      if (!list.length) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <strong>No products added yet.</strong><br/>
-            Add products inside the <code>products</code> array in <code>accessories.html</code>.
-          </div>
-        `;
-        return;
-      }
-
-      grid.innerHTML = list.map((p) => {
-        const img = p.image && String(p.image).trim()
-          ? p.image
-          : imageFromSku(p.sku);
-
-        const mailLink = `mailto:info@sundanceradio.ca?subject=${encodeURIComponent(
-          "Accessory Request - " + (p.name || "")
-        )}`;
-
-        return `
-          <article class="product-card">
-            <div class="product-media">
-              ${
-                img
-                  ? `<img src="${img}" alt="${escapeHtml(p.name)}">`
-                  : `<div style="font-weight:900; opacity:.75; color:white;">Add Image</div>`
-              }
-            </div>
-
-            <div class="product-body">
-              <h3 class="product-name">${escapeHtml(p.name)}</h3>
-              <p class="product-desc">${escapeHtml(p.desc)}</p>
-
-              ${
-                p.tags && p.tags.length
-                  ? `<div class="product-tags">
-                      ${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join("")}
-                    </div>`
-                  : ""
-              }
-
-              <div class="product-actions">
-                ${
-                  p.link
-                    ? `<a class="btn btn-outline" href="${p.link}" target="_blank" rel="noopener">Request Info</a>`
-                    : `<a class="btn btn-outline" href="${mailLink}">Request Info</a>`
-                }
+          return `
+            <article class="card">
+              <div class="media">
+                ${img ? `<img src="${img}" alt="${escapeHtml(p.name)}">` : `<div style="opacity:.85;font-weight:900">Add Image</div>`}
               </div>
-            </div>
-          </article>
-        `;
-      }).join("");
-    });
-  }
 
-  // Active pill highlight (scroll spy)
-  function setupActivePills() {
-    const pills = Array.from(document.querySelectorAll(".category-pill"));
-    const sections = pills
-      .map((p) => document.querySelector(p.getAttribute("href")))
-      .filter(Boolean);
+              <div class="body">
+                <h3 class="name">${escapeHtml(p.name)}</h3>
+                <p class="desc">${escapeHtml(p.desc)}</p>
 
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+                ${p.tags && p.tags.length ? `
+                  <div class="tags">
+                    ${p.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("")}
+                  </div>
+                ` : ""}
+
+                <div class="actions">
+                  ${p.link
+                    ? `<a class="btn primary" href="${p.link}" target="_blank" rel="noopener">View Source</a>`
+                    : `<a class="btn primary" href="${mailLink}">Request Info</a>`
+                  }
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+      });
+    }
+
+    // Scroll spy for pills
+    function setupActivePills() {
+      const pills = Array.from(document.querySelectorAll(".pill"));
+      const sections = pills.map(p => document.querySelector(p.getAttribute("href"))).filter(Boolean);
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
           if (!entry.isIntersecting) return;
           const id = "#" + entry.target.id;
-          pills.forEach((p) =>
-            p.classList.toggle("active", p.getAttribute("href") === id)
-          );
+          pills.forEach(p => p.classList.toggle("active", p.getAttribute("href") === id));
         });
-      },
-      { rootMargin: "-35% 0px -60% 0px", threshold: 0.01 }
-    );
+      }, { rootMargin: "-30% 0px -60% 0px", threshold: 0.01 });
 
-    sections.forEach((s) => obs.observe(s));
-  }
+      sections.forEach(s => obs.observe(s));
+    }
 
-  renderProducts();
-  setupActivePills();
-</script>
-
+    renderProducts();
+    setupActivePills();
+  </script>
 
 </body>
 </html>
