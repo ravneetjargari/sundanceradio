@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X-Zone | Accessories Catalog</title>
+
+  <style>
+    :root{--bg:#070A10;--bg2:#0A0F1A;--panel:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.12);--text:rgba(255,255,255,0.92);--muted:rgba(255,255,255,0.68);--red:#ff2d2d;--cyan:#3CE6FF;--shadow:0 22px 70px rgba(0,0,0,0.55);--shadowSoft:0 14px 45px rgba(0,0,0,0.45);--ease:cubic-bezier(.2,.9,.2,1);--radius:22px;--max:1200px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:radial-gradient(900px 520px at 18% 10%, rgba(255,45,45,0.18), transparent 60%),radial-gradient(900px 520px at 80% 12%, rgba(60,230,255,0.10), transparent 55%),radial-gradient(900px 520px at 45% 90%, rgba(255,45,45,0.12), transparent 60%),linear-gradient(180deg,var(--bg),var(--bg2));min-height:100vh;}
+    a{color:inherit} .container{width:min(var(--max),calc(100% - 2.2rem));margin:0 auto;}
+
+    /* Header (MATCHES other pages) */
+    .header{position:sticky;top:0;z-index:9999;background:rgba(7,10,16,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.10);}
+    .header-inner{display:flex;flex-direction:column;gap:10px;padding:14px 0 12px;}
+    .brand-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0;}
+    .logo{width:76px;height:44px;border-radius:14px;background:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.10);box-shadow:var(--shadowSoft);display:grid;place-items:center;overflow:hidden;flex:0 0 auto;}
+    .logo img{width:100%;height:100%;object-fit:contain;display:block;padding:6px;}
+    .brand-title{display:flex;flex-direction:column;gap:2px;line-height:1.05;min-width:0;}
+    .brand-title .name{font-weight:980;letter-spacing:-0.6px;font-size:1.28rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .brand-title .tagline{color:var(--muted);font-weight:750;font-size:0.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+    .nav{display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;}
+    .pill{flex:0 0 auto;text-decoration:none;font-weight:900;font-size:0.92rem;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);transition:transform .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);box-shadow:0 16px 45px rgba(0,0,0,0.35);white-space:nowrap;}
+    .pill:hover{transform:translateY(-1px);border-color:rgba(255,45,45,0.35);background:rgba(255,45,45,0.10);}
+    .pill.active{border-color:rgba(255,45,45,0.55);background:radial-gradient(380px 140px at 50% 0%, rgba(255,45,45,0.30), transparent 70%), rgba(255,255,255,0.06);}
+
+    /* Hero */
+    .hero{padding:34px 0 18px;}
+    .hero h1{margin:0;font-size:clamp(2.1rem,5.2vw,3.4rem);font-weight:980;letter-spacing:-1px;background:linear-gradient(90deg, rgba(255,255,255,0.92), rgba(255,45,45,0.92), rgba(60,230,255,0.82));-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .hero p{margin:10px 0 0;max-width:78ch;color:var(--muted);font-size:1.02rem;line-height:1.65;}
+
+    .about{
+      margin-top:16px;
+      border-radius:var(--radius);
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:var(--shadowSoft);
+      overflow:hidden;
+      position:relative;
+      padding:18px;
+    }
+    .about::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(closest-side, rgba(255,45,45,0.22), transparent 62%),
+        radial-gradient(closest-side, rgba(60,230,255,0.14), transparent 62%);
+      filter:blur(26px); opacity:.55; pointer-events:none;
+    }
+    .about > *{position:relative; z-index:1}
+
+    /* Tiles */
+    .tiles-wrap{padding:10px 0 34px;}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px;}
+    .tile{
+      grid-column:span 12;
+      text-decoration:none;
+      border-radius:var(--radius);
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:var(--shadowSoft);
+      overflow:hidden;
+      position:relative;
+      transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:140px;
+    }
+    .tile::before{
+      content:"";
+      position:absolute; inset:-1px; border-radius:var(--radius); padding:1px;
+      background:linear-gradient(135deg, rgba(255,45,45,0.45), rgba(255,255,255,0.10), rgba(60,230,255,0.25));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor; mask-composite:exclude;
+      pointer-events:none; opacity:.55;
+    }
+    .tile:hover{transform:translateY(-6px);border-color:rgba(255,45,45,0.25);box-shadow:var(--shadow);}
+    .tile .t-title{margin:0;font-weight:980;letter-spacing:-0.4px;font-size:1.15rem;}
+    .tile .t-sub{margin:0;color:var(--muted);line-height:1.55;}
+    .tile .meta{margin-top:auto;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.82);font-weight:900;font-size:0.92rem;}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,45,45,0.85);box-shadow:0 0 0 4px rgba(255,45,45,0.18);}
+
+    @media(min-width:640px){.tile{grid-column:span 6;}}
+    @media(min-width:980px){.tile{grid-column:span 3;}}
+
+    .footer{border-top:1px solid rgba(255,255,255,0.10);padding:18px 0 26px;color:rgba(255,255,255,0.55);font-weight:700;font-size:0.92rem;}
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand-row">
+          <a class="brand" href="./index.html" aria-label="X-Zone Home">
+            <span class="logo"><img src="../logo2.png" alt="X-Zone Logo" /></span>
+            <span class="brand-title">
+              <span class="name">X-Zone Technologies</span>
+              <span class="tagline">Two-Way Radio Accessories</span>
+            </span>
+          </a>
+        </div>
+
+        <nav class="nav" aria-label="Catalog navigation">
+          <a class="pill" data-page="index.html" href="./index.html">Overview</a>
+          <a class="pill" data-page="chargers.html" href="./chargers.html">Chargers</a>
+          <a class="pill" data-page="headsets.html" href="./headsets.html">Headsets</a>
+          <a class="pill" data-page="cell-boosters.html" href="./cell-boosters.html">Cell Boosters</a>
+          <a class="pill" data-page="opek.html" href="./opek.html">OPEK / Other</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>X-Zone Accessories Catalog</h1>
+      <p><strong>Empowering users with Two-Way Radio Accessories that work as hard as they do.</strong></p>
+
+      <div class="about">
+        <p style="margin:0 0 12px;">
+          With three decades of experience in demanding two-way radio environments, X-Zone Technologies specializes in designing and supplying radio accessories for the wholesale communication accessory market. They offer durable and versatile communication solutions tailored for active and harsh settings.
+        </p>
+        <p style="margin:0;">
+          X-Zone's products are designed to compete with OEM accessories, providing customers with improved profit margins and end-users with a high-quality product at a competitive price point.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tiles-wrap">
+    <div class="container">
+      <div class="grid">
+        <a class="tile" href="./chargers.html">
+          <h3 class="t-title">Chargers</h3>
+          <p class="t-sub">Multi-unit, fleet charging stations, and power accessories.</p>
+          <div class="meta"><span class="dot"></span> Browse Chargers</div>
+        </a>
+
+        <a class="tile" href="./headsets.html">
+          <h3 class="t-title">Headsets</h3>
+          <p class="t-sub">Hearing protection, tactical kits, and noise-cancelling options.</p>
+          <div class="meta"><span class="dot"></span> Browse Headsets</div>
+        </a>
+
+        <a class="tile" href="./cell-boosters.html">
+          <h3 class="t-title">Cell Boosters</h3>
+          <p class="t-sub">Booster kits, antennas, splitters, taps, and power supplies.</p>
+          <div class="meta"><span class="dot"></span> Browse Cell Boosters</div>
+        </a>
+
+        <a class="tile" href="./opek.html">
+          <h3 class="t-title">OPEK / Other</h3>
+          <p class="t-sub">Mounts, brackets, speakers, bulkheads, and more accessories.</p>
+          <div class="meta"><span class="dot"></span> Browse Other</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">© <span id="year"></span> X-Zone Technologies</div>
+  </footer>
+
+  <script>
+    // year
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // active pill (matches your other pages)
+    const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    document.querySelectorAll(".pill").forEach(p => {
+      const page = (p.dataset.page || "").toLowerCase();
+      p.classList.toggle("active", page === current);
+    });
+  </script>
+</body>
+</html>

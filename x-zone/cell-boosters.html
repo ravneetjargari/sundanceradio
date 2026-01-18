@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X-Zone | Cell Boosters</title>
+
+  <style>
+    :root{--bg:#070A10;--bg2:#0A0F1A;--panel:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.12);--text:rgba(255,255,255,0.92);--muted:rgba(255,255,255,0.68);--red:#ff2d2d;--cyan:#3CE6FF;--shadow:0 22px 70px rgba(0,0,0,0.55);--shadowSoft:0 14px 45px rgba(0,0,0,0.45);--ease:cubic-bezier(.2,.9,.2,1);--radius:22px;--max:1200px;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:radial-gradient(900px 520px at 18% 10%, rgba(255,45,45,0.18), transparent 60%),radial-gradient(900px 520px at 80% 12%, rgba(60,230,255,0.10), transparent 55%),radial-gradient(900px 520px at 45% 90%, rgba(255,45,45,0.12), transparent 60%),linear-gradient(180deg,var(--bg),var(--bg2));min-height:100vh;}
+    a{color:inherit} .container{width:min(var(--max),calc(100% - 2.2rem));margin:0 auto;}
+    .header{position:sticky;top:0;z-index:9999;background:rgba(7,10,16,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.10);}
+    .header-inner{display:flex;flex-direction:column;gap:10px;padding:14px 0 12px;}
+    .brand-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0;}
+    .logo{width:76px;height:44px;border-radius:14px;background:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.10);box-shadow:var(--shadowSoft);display:grid;place-items:center;overflow:hidden;flex:0 0 auto;}
+    .logo img{width:100%;height:100%;object-fit:contain;display:block;padding:6px;}
+    .brand-title{display:flex;flex-direction:column;gap:2px;line-height:1.05;min-width:0;}
+    .brand-title .name{font-weight:980;letter-spacing:-0.6px;font-size:1.28rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .brand-title .tagline{color:var(--muted);font-weight:750;font-size:0.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .nav{display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;}
+    .pill{flex:0 0 auto;text-decoration:none;font-weight:900;font-size:0.92rem;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);transition:transform .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);box-shadow:0 16px 45px rgba(0,0,0,0.35);white-space:nowrap;}
+    .pill:hover{transform:translateY(-1px);border-color:rgba(255,45,45,0.35);background:rgba(255,45,45,0.10);}
+    .pill.active{border-color:rgba(255,45,45,0.55);background:radial-gradient(380px 140px at 50% 0%, rgba(255,45,45,0.30), transparent 70%), rgba(255,255,255,0.06);}
+    .hero{padding:28px 0 12px;}
+    .hero h1{margin:0;font-size:clamp(1.9rem, 4.8vw, 2.7rem);font-weight:980;letter-spacing:-1px;background:linear-gradient(90deg, rgba(255,255,255,0.92), rgba(255,45,45,0.92), rgba(60,230,255,0.82));-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .hero p{margin:10px 0 0;max-width:75ch;color:var(--muted);font-size:1.02rem;line-height:1.6;}
+    main{padding:8px 0 34px;}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;}
+    .card{grid-column:span 12;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadowSoft);position:relative;transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);}
+    .card::before{content:"";position:absolute;inset:-1px;border-radius:var(--radius);padding:1px;background:linear-gradient(135deg, rgba(255,45,45,0.45), rgba(255,255,255,0.10), rgba(60,230,255,0.25));-webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:0.55;}
+    .card:hover{transform:translateY(-6px);border-color:rgba(255,45,45,0.25);box-shadow:var(--shadow);}
+    .media{aspect-ratio:16/10;background:radial-gradient(600px 340px at 30% 25%, rgba(255,45,45,0.18), transparent 55%),radial-gradient(600px 340px at 70% 25%, rgba(60,230,255,0.12), transparent 60%),linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.18));display:grid;place-items:center;}
+    .media img{width:100%;height:100%;object-fit:cover;display:block;}
+    .body{padding:14px 14px 16px;display:grid;gap:8px;position:relative;z-index:1;}
+    .name{margin:0;font-weight:950;font-size:1.02rem;letter-spacing:-0.3px;}
+    .desc{margin:0;color:var(--muted);font-size:0.96rem;line-height:1.55;}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
+    .tag{font-size:0.78rem;font-weight:900;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.82);}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:950;letter-spacing:.2px;border-radius:14px;padding:10px 14px;border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.06);transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease);}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,45,45,0.35);background:rgba(255,45,45,0.12);}
+    .btn.primary{border-color:rgba(255,45,45,0.55);background:radial-gradient(520px 220px at 50% 0%, rgba(255,45,45,0.40), transparent 65%), rgba(255,255,255,0.06);}
+    .empty{grid-column:1/-1;border-radius:18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);padding:14px;color:var(--muted);}
+    @media (min-width:640px){.card{grid-column:span 6;}}
+    @media (min-width:980px){.card{grid-column:span 4;}}
+    .footer{border-top:1px solid rgba(255,255,255,0.10);padding:18px 0 26px;color:rgba(255,255,255,0.55);font-weight:700;font-size:0.92rem;}
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand-row">
+        <a class="brand" href="./index.html" aria-label="X-Zone Home">
+          <span class="logo"><img src="../logo2.png" alt="X-Zone Logo"></span>
+          <span class="brand-title">
+            <span class="name">X-Zone Technologies</span>
+            <span class="tagline">Two-Way Radio Accessories</span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="nav" aria-label="Product categories">
+        <a class="pill" data-page="index.html" href="./index.html">Overview</a>
+        <a class="pill" data-page="chargers.html" href="./chargers.html">Chargers</a>
+        <a class="pill" data-page="headsets.html" href="./headsets.html">Headsets</a>
+        <a class="pill" data-page="cell-boosters.html" href="./cell-boosters.html">Cell Boosters</a>
+        <a class="pill" data-page="opek.html" href="./opek.html">OPEK / Other</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Cell Boosters</h1>
+    <p>Vehicle, indoor, and portable cellular signal enhancement solutions.</p>
+  </div>
+</section>
+
+<main>
+  <div class="container">
+    <div class="grid" id="productGrid"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">© <span id="year"></span> X-Zone Technologies</div>
+</footer>
+
+<script>
+  const PAGE_CATEGORY = "cell-booster";
+
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  function setActivePill() {
+    const current = (location.pathname.split("/").pop() || "").toLowerCase();
+    document.querySelectorAll(".pill").forEach(p => {
+      const page = (p.dataset.page || "").toLowerCase();
+      p.classList.toggle("active", page === current);
+    });
+  }
+  setActivePill();
+
+  const IMAGE_EXT = {
+    "AM-406": "png",                 /* remove if your file is actually jpg */
+    "AM-411": "png",
+    "sc-fusionpro-ca": "png",
+    "SC-FUSION2GO5G-VEH": "png",
+    "SC-FUSION2GO3-CA": "png",
+    "scflare-3ca": "png",
+    "SC-INDOOR-DOME-5G": "png",
+    "sc-528w": "png",
+    "sc-288w": "png",
+    "SC-208W": "png",
+    "SC-DC-CIG-12V-5A": "png",
+    "SC-FME-WHIP": "png",
+    "SC110W": "png"
+  };
+
+  function imageFromSku(sku) {
+    if (!sku) return "";
+    const normalized = String(sku).replaceAll("/", "-");
+    const ext = IMAGE_EXT[sku] || IMAGE_EXT[normalized] || "jpg";
+    return "../images/accessories/" + normalized + "." + ext;
+  }
+
+  function escapeHtml(str) {
+    return String(str || "").replace(/[&<>"']/g, s => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[s]));
+  }
+
+  const products = [
+    /* ✅ KEEP ONLY products with category: "cell-booster" if you want cleaner,
+       but leaving the full list is fine. */
+
+    {
+      sku: "sc-fusionpro-ca",
+      category: "cell-booster",
+      name: "SureCall Fusion Professional 2.0 – 8 Band Booster Kit",
+      desc: "High-performance in-building booster kit designed to improve voice quality, data speeds, and overall reliability for multiple users across major Canadian carriers.",
+      tags: ["8-band", "Building kit", "Multi-user"],
+      link: "https://www.cwsupply.ca/shop/sc-fusionpro-ca-surecall-fusion-professional-2-0-8-band-booster-kit-6113?category=161"
+    },
+    {
+      sku: "sc-fusion2go5g-otr",
+      category: "cell-booster",
+      name: "SureCall Fusion2Go 5G – 7 Band OTR Booster Kit",
+      desc: "Vehicle-grade booster kit for over-the-road applications. Improves in-cab signal stability for calls, texts, and data while travelling through weak coverage areas.",
+      tags: ["7-band", "OTR", "Vehicle kit"],
+      link: "https://www.cwsupply.ca/shop/sc-fusion2go5g-otr-surecall-fusion2go-5g-7-band-otr-booster-kit-7369?category=161"
+    },
+    {
+      sku: "scflare-3ca",
+      category: "cell-booster",
+      name: "SureCall Flare – 5 Band Booster Kit",
+      desc: "Compact booster kit built to strengthen indoor signal where coverage is inconsistent. Great for improving call clarity and usable data in smaller homes, cabins, and offices.",
+      tags: ["5-band", "Indoor coverage", "Compact"],
+      link: "https://www.cwsupply.ca/shop/scflare-3ca-surecall-flare-5-band-booster-kit-4810?category=161"
+    },
+
+    /* paste the rest of your cell-booster items here (unchanged) */
+  ];
+
+  function renderCategoryProducts() {
+    const grid = document.getElementById("productGrid");
+    if (!grid) return;
+
+    const list = products.filter(p => p.category === PAGE_CATEGORY);
+
+    if (!list.length) {
+      grid.innerHTML = `<div class="empty"><strong>No products found for this category.</strong></div>`;
+      return;
+    }
+
+    grid.innerHTML = list.map(p => {
+      const img = (p.image && String(p.image).trim()) ? p.image : imageFromSku(p.sku);
+      const mailLink = `mailto:info@sundanceradio.ca?subject=${encodeURIComponent("Accessory Request - " + (p.name || ""))}`;
+
+      return `
+        <article class="card">
+          <div class="media">
+            ${img ? `<img src="${img}" alt="${escapeHtml(p.name)}">` : `<div style="opacity:.85;font-weight:900">Add Image</div>`}
+          </div>
+          <div class="body">
+            <h3 class="name">${escapeHtml(p.name)}</h3>
+            <p class="desc">${escapeHtml(p.desc)}</p>
+            ${p.tags && p.tags.length ? `<div class="tags">${p.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>` : ""}
+            <div class="actions">
+              ${p.link ? `<a class="btn primary" href="${p.link}" target="_blank" rel="noopener">View Source</a>` : `<a class="btn primary" href="${mailLink}">Request Info</a>`}
+            </div>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  renderCategoryProducts();
+</script>
+
+</body>
+</html>
